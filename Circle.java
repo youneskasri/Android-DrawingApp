@@ -21,6 +21,10 @@ class Circle {
 
     public Circle(float x, float y){
         this(x, y, 20, new Paint());
+        setPaint();
+    }
+
+    private void setPaint() {
         paint.setColor(Color.LTGRAY);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -28,7 +32,7 @@ class Circle {
         paint.setStrokeWidth(5f);
     }
 
-    public boolean surround(float x, float y) {
+    public boolean doesSurround(float x, float y) {
 
         Log.i("Encercler", "Point A : (x,y)=("+x+", "+y+")");
         Log.i("Encercler", "Centre : (x,y)=("+this.x+", "+this.y+")");
