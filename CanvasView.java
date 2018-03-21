@@ -7,16 +7,14 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.nfc.Tag;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import gl2.kasri.younes.*;
 /**
  * Created by admin on 15/02/2018.
@@ -41,6 +39,7 @@ public class CanvasView extends View {
     private Numbers numbers;
 
     protected List<Point>  points = null;
+    protected List<Circle> circles = null;
 
     Rect borders;
     Paint bordersPaint;
@@ -58,10 +57,10 @@ public class CanvasView extends View {
 
         density = context.getResources().getDisplayMetrics().density;
 
-        borders = new Rect( Math.round(100 * density),
+         borders = new Rect( Math.round(100 * density),
                 Math.round(130 * density),
                 Math.round(280 * density),
-                Math.round(380 * density));
+                Math.round(380 * density)); 
 
         bordersPaint = new Paint(paint);
         bordersPaint.setColor(Color.LTGRAY);
@@ -71,21 +70,21 @@ public class CanvasView extends View {
     }
 
     @Override
-    /*
-    * Initialiser 'points'
-    * Redessiner nombre a chaque fois
-     */
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         this.canvas = canvas;
 
-        canvas.drawPath(path, paint);
-
-        if (points == null)
+        if (points == null) {
             points = numbers.getNumberWithPoints(currentNumber);
+            circles = new ArrayList<Circle>();
+            for (Point p : points){
+                circles.add( new Circle(p.x, p.y) );
+            }
+        }
 
+        drawCircles();
         drawNumber();
-        drawBorder();
+        canvas.drawPath(path, paint);
     }
 
     /** Pr Chaque point --> canvas.drawCircle */
@@ -97,28 +96,64 @@ public class CanvasView extends View {
         paint.setColor(Color.RED);
     }
 
+    private void drawCircles(){
+        for (Circle c : circles){
+            canvas.drawCircle(c.x * density, c.y * density, c.radius * density, c.paint);
+        }
+    }
+
     private void drawBorder(){
         canvas.drawRect(borders, bordersPaint);
     }
 
 
+    boolean wasOutOfBounds;
     public boolean onTouchEvent(MotionEvent event) {
         super.onTouchEvent(event);
 
         float x = event.getX();
         float y = event.getY();
 
+
         switch(event.getAction()){
             case MotionEvent.ACTION_DOWN:
+                if ( isOutOfBounds(x, y) ){
+                    wasOutOfBounds = true;
+                    return true;
+                }
+                startTouch(x, y);
+                invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
+                if ( isOutOfBounds(x, y)  ){
+                    clearCanvas();
+                    wasOutOfBounds = true;
+                    return true;
+                }
+                if (wasOutOfBounds){
+                    return true;
+                }
                 if (marquerLePoint(x,y))
                     Log.i("TAG", "onTouchEvent: J'ai marqué le point " + x +"-"+y);
-                drawCorrectPath();
+                //drawCorrectPath();
+
+                moveTouch(x, y);
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
-                verifierSiTermineOuGagne();
+                // verifierSiTermineOuGagne();
+                if (wasOutOfBounds){
+                    path.moveTo(x,y);
+                    wasOutOfBounds = false;
+                    return true;
+                }
+                upTouch();
+                invalidate();
+
+                if (points.size() == 0){
+                    drawActivity.correctAnswer();
+                }
+
                 break;
         }
 
@@ -142,10 +177,6 @@ public class CanvasView extends View {
                 unPointEstMarque = true;
             }
 
-
-           /*  if ( pointsMarques.size()>1 ){
-                drawCorrectPath();
-            } */
         }
 
         return unPointEstMarque;
@@ -214,6 +245,7 @@ public class CanvasView extends View {
 
     public void clearCanvas(){
         path.reset();
+        points = numbers.getNumberWithPoints(currentNumber);
         invalidate();
     }
 
@@ -267,28 +299,13 @@ public class CanvasView extends View {
     }
 
     public boolean isOutOfBounds(float x, float y){
-
-        // TODO
-        /* boolean tropLoin = true;
-        for (int i = 0; i<points.size(); i++) {
-            float dx = Math.abs(x - points.get(i).x * density);
-            float dy = Math.abs(y - points.get(i).y * density);
-
-            if (dx <= 100 && dy <= 100) {
-                tropLoin = false;
-                break;
+        for (Circle circle : circles) {
+            // si distanceEntre(A, Centre)>Radius => OutOfBounds
+            if ( circle.surround(x/density,y/density) ) {
+                return false;
             }
         }
-
-        return tropLoin; */
-        boolean outOfBounds = false;
-
-        if ( x < borders.left || x > borders.right
-                ||y < borders.bottom || y>borders.top) {
-            outOfBounds = true;
-        }
-
-        return outOfBounds;
+        return true;
     }
 
 
