@@ -3,6 +3,7 @@ package gl2.kasri.younes.paintapplication;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
+import gl2.kasri.younes.Dev;
 
 /**
  * Created by admin on 21/03/2018.
@@ -33,14 +34,11 @@ class Circle {
 
     public boolean doesSurround(float x, float y) {
 
-        Log.i("Encercler", "Point A : (x,y)=("+x+", "+y+")");
-        Log.i("Encercler", "Centre : (x,y)=("+this.x+", "+this.y+")");
         double distanceDuCentre = Math.sqrt( Math.pow(this.x - x, 2) + Math.pow(this.y - y, 2));
-        Log.i("Encercler", " ||AC|| = " + distanceDuCentre);
-        Log.i("Encercler", " R = " + radius);
 
         if ( distanceDuCentre <= radius ) {
-            Log.i("Encercler", "surround: OUI");
+            Log.i(Dev.TAG, " ||AC|| = " + distanceDuCentre);
+            Log.i(Dev.TAG, " R = " + radius);
             return true;
         }
         return false;

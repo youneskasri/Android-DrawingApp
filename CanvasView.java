@@ -95,7 +95,7 @@ public class CanvasView extends View {
                     return true;
                 }
                 if (marquerLePoint(x,y))
-                    Log.i("TAG", "onTouchEvent: J'ai marqué le point " + x +"-"+y);
+                    Log.i(Dev.TAG, "onTouchEvent: J'ai marqué le point " + x +"-"+y);
                 moveTouch(x, y);
                 invalidate();
                 break;
@@ -197,15 +197,6 @@ public class CanvasView extends View {
         paint.setStrokeWidth(strokeWidth);
     }
 
-
-      /*   protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-       super.onSizeChanged(w, h, oldw, oldh);
-
-        bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        canvas = new Canvas(bitmap);
-    }
-*/
-
     private void drawNumber(){
         paint.setColor(Color.DKGRAY);
         for (Point p : points) {
@@ -219,6 +210,15 @@ public class CanvasView extends View {
             canvas.drawCircle(c.x * density, c.y * density, c.radius * density, c.paint);
         }
     }
+
+
+      /*   protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+       super.onSizeChanged(w, h, oldw, oldh);
+
+        bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        canvas = new Canvas(bitmap);
+    }
+*/
 
 }
 

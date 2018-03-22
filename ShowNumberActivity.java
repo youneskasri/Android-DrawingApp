@@ -9,14 +9,15 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import gl2.kasri.younes.Dev;
+
 public class ShowNumberActivity extends AppCompatActivity {
 
     static final int DRAW_NUMBER_REQUEST = 1;  // The request code
-    static final int MAX_NUMBER = 5, MAX_LEVEL = 1;
 
     private TextView numberTextView;
 
-    protected boolean startedAnActivity = false;
+    protected boolean startedDrawingActivity = false;
     protected boolean gameOver = false;
 
     protected static int currentNumber = 2;
@@ -24,26 +25,27 @@ public class ShowNumberActivity extends AppCompatActivity {
 
     public void nextNumber(){
         currentNumber++;
-        if ( currentNumber > MAX_NUMBER ){
+        if ( currentNumber > Dev.MAX_NUMBER ){
             moveToNextLevel();
         }
     }
 
     public void moveToNextLevel(){
         currentLevel++;
-        if ( currentLevel > MAX_LEVEL){
+        if ( currentLevel > Dev.MAX_LEVEL){
             endTheGame(true);
         }
     }
 
     public void endTheGame(boolean wonTheGame){
-        if (wonTheGame){
-            numberTextView.setText("Congratulations ! You won");
-            numberTextView.setTextColor(Color.GREEN);
-        } else {
-            numberTextView.setText("Too bad :( .. Keep trying");
-            numberTextView.setTextColor(Color.RED);
-        }
+
+        numberTextView.setTextSize(32);
+        numberTextView.setText("Game Over");
+        gameOver = true;
+
+        Intent intent = new Intent(ShowNumberActivity.this, GameOverActivity.class);
+        intent.putExtra("wonTheGame", wonTheGame);
+        startActivity(intent);
     }
 
 
@@ -59,8 +61,8 @@ public class ShowNumberActivity extends AppCompatActivity {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        if (!startedAnActivity && !gameOver) {
-            startedAnActivity = true;
+        if (!startedDrawingActivity && !gameOver) {
+            startedDrawingActivity = true;
             Intent intent = new Intent(ShowNumberActivity.this, DrawActivity.class);
             startActivityForResult(intent, DRAW_NUMBER_REQUEST);
         }
@@ -70,18 +72,18 @@ public class ShowNumberActivity extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
-        if ( startedAnActivity && requestCode == DRAW_NUMBER_REQUEST) {
+        if ( startedDrawingActivity && requestCode == DRAW_NUMBER_REQUEST) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                Log.i("RESULT_OK", "onActivityResult: moving to nextNumber");
+                Log.i(Dev.TAG, "RESULT_OK onActivityResult: moving to nextNumber");
                 nextNumber();
-            } else if ( resultCode == RESULT_CANCELED ){
-                Log.i("WRONG_ANSWER", "onActivityResult: Try again with this number");
+            } else if (resultCode == RESULT_CANCELED ){
+                Log.i(Dev.TAG, "WRONG_ANSWER onActivityResult: Try again with the same number");
             }
-            numberTextView.setText(""+currentNumber);
+            if (!gameOver) numberTextView.setText(""+currentNumber);
         }
 
-        startedAnActivity = false;
+        startedDrawingActivity = false;
     }
 
 }
