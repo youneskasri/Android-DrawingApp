@@ -46,6 +46,10 @@ public class ShowNumberActivity extends AppCompatActivity {
         Intent intent = new Intent(ShowNumberActivity.this, GameOverActivity.class);
         intent.putExtra("wonTheGame", wonTheGame);
         startActivity(intent);
+
+        // TODO Finish, retourner A l'activité de début
+        // TODO New Intent activiteDebut --> GameOverActivity
+        // TODO GameOverActivity.onTouch => return to activiteDebut
     }
 
 
