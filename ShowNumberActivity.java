@@ -41,10 +41,8 @@ public class ShowNumberActivity extends AppCompatActivity {
         numberTextView.setText("Game Over");
         gameOver = true;
 
-        /*
-        Intent intent = new Intent(ShowNumberActivity.this, GameOverActivity.class);
-        intent.putExtra("wonTheGame", wonTheGame);
-        startActivity(intent); */
+        currentNumber = 1;
+        currentLevel = 1;
 
         if (wonTheGame) {
             setResult(RESULT_OK);
