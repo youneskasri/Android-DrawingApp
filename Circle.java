@@ -7,7 +7,6 @@ import android.util.Log;
 /**
  * Created by admin on 21/03/2018.
  */
-
 class Circle {
     public float x,y, radius;
     Paint paint;

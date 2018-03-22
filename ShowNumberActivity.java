@@ -1,6 +1,7 @@
 package gl2.kasri.younes.paintapplication;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,21 +12,40 @@ import android.widget.Toast;
 public class ShowNumberActivity extends AppCompatActivity {
 
     static final int DRAW_NUMBER_REQUEST = 1;  // The request code
+    static final int MAX_NUMBER = 5, MAX_LEVEL = 1;
 
-    TextView numberTextView;
-    boolean startedAnActivity = false;
+    private TextView numberTextView;
 
-    static int currentNumber = 2;
-    static int currentLevel = 1;
+    protected boolean startedAnActivity = false;
+    protected boolean gameOver = false;
 
+    protected static int currentNumber = 2;
+    protected static int currentLevel = 1;
 
-    public static void nextNumber(){
+    public void nextNumber(){
         currentNumber++;
-       // if (currentNumber>=6) moveToNextLevel();
+        if ( currentNumber > MAX_NUMBER ){
+            moveToNextLevel();
+        }
     }
-    public static void moveToNextLevel(){
+
+    public void moveToNextLevel(){
         currentLevel++;
+        if ( currentLevel > MAX_LEVEL){
+            endTheGame(true);
+        }
     }
+
+    public void endTheGame(boolean wonTheGame){
+        if (wonTheGame){
+            numberTextView.setText("Congratulations ! You won");
+            numberTextView.setTextColor(Color.GREEN);
+        } else {
+            numberTextView.setText("Too bad :( .. Keep trying");
+            numberTextView.setTextColor(Color.RED);
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +59,7 @@ public class ShowNumberActivity extends AppCompatActivity {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        if (!startedAnActivity) {
+        if (!startedAnActivity && !gameOver) {
             startedAnActivity = true;
             Intent intent = new Intent(ShowNumberActivity.this, DrawActivity.class);
             startActivityForResult(intent, DRAW_NUMBER_REQUEST);
@@ -55,10 +75,9 @@ public class ShowNumberActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Log.i("RESULT_OK", "onActivityResult: moving to nextNumber");
                 nextNumber();
-            } else {
-                Toast.makeText(this, "Essayez encore", Toast.LENGTH_LONG).show();
+            } else if ( resultCode == RESULT_CANCELED ){
+                Log.i("WRONG_ANSWER", "onActivityResult: Try again with this number");
             }
-
             numberTextView.setText(""+currentNumber);
         }
 

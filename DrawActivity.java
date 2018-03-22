@@ -10,7 +10,7 @@ import android.widget.Toast;
 public class DrawActivity extends AppCompatActivity {
 
     private CanvasView canvasView;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,14 +23,14 @@ public class DrawActivity extends AppCompatActivity {
 
 
     public void correctAnswer(){
-        Toast.makeText(this, "Moving to the next level", Toast.LENGTH_LONG).show();
-        setResult(RESULT_OK);
+        showToast("Good Job ! Moving to the next level");
+        setResult(RESULT_OK); // equals -1
         finish();
     }
 
     public void wrongAnswer(){
-        Toast.makeText(this, "You lost !", Toast.LENGTH_LONG).show();
-        setResult(-1);
+        showToast("You lost ! Try again");
+        setResult(RESULT_CANCELED);
         finish();
     }
 
@@ -38,10 +38,8 @@ public class DrawActivity extends AppCompatActivity {
         canvasView.clearCanvas();
     }
 
-    /*
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return false;
+    public void showToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
-    */
+
 }

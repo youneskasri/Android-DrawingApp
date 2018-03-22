@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class CanvasView extends View {
     protected List<Point>  points = null;
     protected List<Circle> circles = null;
 
+    protected int remainingAttempts = 3;
 
     /** Constructor */
     public CanvasView(Context context, AttributeSet attributeSet){
@@ -99,6 +101,7 @@ public class CanvasView extends View {
                 break;
             case MotionEvent.ACTION_UP:
                 if (wasOutOfBounds){
+                    checkRemainingAttempts();
                     path.moveTo(x,y);
                     wasOutOfBounds = false;
                     return true;
@@ -129,6 +132,15 @@ public class CanvasView extends View {
         }
 
         return unPointEstMarque;
+    }
+
+    private void checkRemainingAttempts(){
+        remainingAttempts--;
+        drawActivity.showToast("Attention ! Il vous reste " + remainingAttempts +" tentative(s)");
+
+        if (remainingAttempts == 0){
+            drawActivity.wrongAnswer();
+        }
     }
 
     public boolean isOutOfBounds(float x, float y){
