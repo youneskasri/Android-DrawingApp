@@ -1,19 +1,17 @@
 package gl2.kasri.younes.paintapplication;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import gl2.kasri.younes.Dev;
 
 public class ShowNumberActivity extends AppCompatActivity {
 
-    static final int DRAW_NUMBER_REQUEST = 1;  // The request code
+    public final static int DRAW_NUMBER_REQUEST = 1;  // The request code
 
     private TextView numberTextView;
 
@@ -43,13 +41,17 @@ public class ShowNumberActivity extends AppCompatActivity {
         numberTextView.setText("Game Over");
         gameOver = true;
 
+        /*
         Intent intent = new Intent(ShowNumberActivity.this, GameOverActivity.class);
         intent.putExtra("wonTheGame", wonTheGame);
-        startActivity(intent);
+        startActivity(intent); */
 
-        // TODO Finish, retourner A l'activité de début
-        // TODO New Intent activiteDebut --> GameOverActivity
-        // TODO GameOverActivity.onTouch => return to activiteDebut
+        if (wonTheGame) {
+            setResult(RESULT_OK);
+        } else {
+            setResult(RESULT_CANCELED);
+        }
+        finish();
     }
 
 

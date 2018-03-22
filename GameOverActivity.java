@@ -1,8 +1,7 @@
 package gl2.kasri.younes.paintapplication;
 
-import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,5 +35,7 @@ public class GameOverActivity extends AppCompatActivity {
         messageTextView.setText(message);
         imageView.setImageResource(idImage);
     }
+
+    // TODO onClick Listener => return to MainActivity ( finish() )
 }
 
