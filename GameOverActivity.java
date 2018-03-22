@@ -3,6 +3,7 @@ package gl2.kasri.younes.paintapplication;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,6 +37,12 @@ public class GameOverActivity extends AppCompatActivity {
         imageView.setImageResource(idImage);
     }
 
-    // TODO onClick Listener => return to MainActivity ( finish() )
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        finish();
+        return true;
+    }
+
+
 }
 
