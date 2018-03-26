@@ -18,8 +18,8 @@ public class ShowNumberActivity extends AppCompatActivity {
     protected boolean startedDrawingActivity = false;
     protected boolean gameOver = false;
 
-    protected static int currentNumber = 0;
-    protected static int currentLevel = 1;
+    protected static int currentNumber = Dev.STARTING_NUMBER;
+    protected static int currentLevel = Dev.STARTING_LEVEL;
 
     public void nextNumber(){
         currentNumber++;
@@ -30,6 +30,7 @@ public class ShowNumberActivity extends AppCompatActivity {
 
     public void moveToNextLevel(){
         currentLevel++;
+        currentNumber = 0;
         if ( currentLevel > Dev.MAX_LEVEL){
             endTheGame(true);
         }

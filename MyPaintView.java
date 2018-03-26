@@ -25,6 +25,8 @@ public class MyPaintView extends CanvasView {
     private DrawActivity drawActivity; // The calling activity
 
     private int currentNumber;
+    private int currentLevel;
+
     private Numbers numbers; // Helper Class contenant l'ensemble des points pr chaque nombre.
 
     private List<Point>  points = null;
@@ -156,18 +158,23 @@ public class MyPaintView extends CanvasView {
     public void setCurrentNumber(int currentNumber){
         this.currentNumber = currentNumber;
     }
+    public void setCurrentLevel(int currentLevel) { this.currentLevel = currentLevel; }
 
     private void drawNumber(){
         paint.setColor(Color.DKGRAY);
         for (Point p : points) {
-            canvas.drawCircle(p.x * density, p.y * density, 0.2f * density, paint);
+            float radius = 0.2f * density;
+            // TODO
+            Log.i(Dev.TAG, "drawNumber: radius = "+ radius);
+            canvas.drawCircle(p.x * density, p.y * density, radius, paint);
         }
         paint.setColor(Color.RED);
     }
 
     private void drawCircles(){
         for (Circle c : circles){
-            canvas.drawCircle(c.x * density, c.y * density, c.radius * density, c.paint);
+            float radius = c.radius * density / currentLevel; // TODO
+            canvas.drawCircle(c.x * density, c.y * density, radius, c.paint);
         }
     }
 

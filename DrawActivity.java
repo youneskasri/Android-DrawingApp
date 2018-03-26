@@ -16,6 +16,7 @@ public class DrawActivity extends AppCompatActivity {
         myPaintView = findViewById(R.id.canvas);
         myPaintView.setDrawActivity(this);
         myPaintView.setCurrentNumber(ShowNumberActivity.currentNumber);
+        myPaintView.setCurrentLevel(ShowNumberActivity.currentLevel);
     }
 
     public void correctAnswer(){
