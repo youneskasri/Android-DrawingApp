@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("wonTheGame", true);
                 startActivity(intent);
             } else if (resultCode == RESULT_CANCELED ){
-                // TODO Make sure les niveaux sont remis à 0
+                // TODO RESULT_CANCELED C' QUOI ??
             }
         }
     }

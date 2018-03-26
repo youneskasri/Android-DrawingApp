@@ -1,26 +1,22 @@
 package gl2.kasri.younes.paintapplication;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
 public class DrawActivity extends AppCompatActivity {
 
-    private CanvasView canvasView;
+    private MyPaintView myPaintView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw);
-        canvasView = findViewById(R.id.canvas);
-        canvasView.setDrawActivity(this);
-        canvasView.setCurrentNumber(ShowNumberActivity.currentNumber);
+        myPaintView = findViewById(R.id.canvas);
+        myPaintView.setDrawActivity(this);
+        myPaintView.setCurrentNumber(ShowNumberActivity.currentNumber);
     }
-
-
 
     public void correctAnswer(){
         showToast("Good Job ! Moving to the next level");
@@ -35,7 +31,7 @@ public class DrawActivity extends AppCompatActivity {
     }
 
     public void clearCanvas(View v){
-        canvasView.clearCanvas();
+        myPaintView.clearCanvasAndRefreshPoints();
     }
 
     public void showToast(String text) {

@@ -18,7 +18,7 @@ public class ShowNumberActivity extends AppCompatActivity {
     protected boolean startedDrawingActivity = false;
     protected boolean gameOver = false;
 
-    protected static int currentNumber = 2;
+    protected static int currentNumber = 0;
     protected static int currentLevel = 1;
 
     public void nextNumber(){
