@@ -25,6 +25,7 @@ public class Level implements Serializable{
     }
 
     public Level(int number, int difficultyLevel){
+        super();
         this.number = number;
         this.difficultyLevel = difficultyLevel;
         numbers = new Numbers();
