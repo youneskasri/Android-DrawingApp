@@ -1,16 +1,17 @@
-package gl2.kasri.younes.paintapplication;
+package gl2.kasri.younes.paintapplication.helpers;
 
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
-import gl2.kasri.younes.Dev;
+
+import gl2.kasri.younes.paintapplication.Dev;
 
 /**
  * Created by admin on 21/03/2018.
  */
-class Circle {
+public class Circle {
     public float x,y, radius;
-    Paint paint;
+    public Paint paint;
 
     public Circle(float x, float y, float radius, Paint paint){
         this.x = x;

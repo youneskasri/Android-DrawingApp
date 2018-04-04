@@ -1,10 +1,12 @@
-package gl2.kasri.younes.paintapplication;
+package gl2.kasri.younes.paintapplication.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import gl2.kasri.younes.paintapplication.R;
 
 
 public class MainActivity extends AppCompatActivity {

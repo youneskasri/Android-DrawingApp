@@ -1,4 +1,4 @@
-package gl2.kasri.younes.paintapplication;
+package gl2.kasri.younes.paintapplication.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,34 +7,20 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-import gl2.kasri.younes.Dev;
+import gl2.kasri.younes.paintapplication.Dev;
+import gl2.kasri.younes.paintapplication.R;
+import gl2.kasri.younes.paintapplication.helpers.Level;
 
 public class ShowNumberActivity extends AppCompatActivity {
 
-    public final static int DRAW_NUMBER_REQUEST = 1;  // The request code
+    public final static int DRAW_NUMBER_REQUEST = 200;  // The request code
 
     private TextView numberTextView;
 
     protected boolean startedDrawingActivity = false;
     protected boolean gameOver = false;
 
-    protected static int currentNumber = Dev.STARTING_NUMBER;
-    protected static int currentLevel = Dev.STARTING_LEVEL;
-
-    public void nextNumber(){
-        currentNumber++;
-        if ( currentNumber > Dev.MAX_NUMBER ){
-            moveToNextLevel();
-        }
-    }
-
-    public void moveToNextLevel(){
-        currentLevel++;
-        currentNumber = 0;
-        if ( currentLevel > Dev.MAX_LEVEL){
-            endTheGame(true);
-        }
-    }
+    protected Level currentLevel;
 
     public void endTheGame(boolean wonTheGame){
 
@@ -42,8 +28,7 @@ public class ShowNumberActivity extends AppCompatActivity {
         numberTextView.setText("Game Over");
         gameOver = true;
 
-        currentNumber = 1;
-        currentLevel = 1;
+        currentLevel = new Level(); // reinitialiser à 0
 
         if (wonTheGame) {
             setResult(RESULT_OK);
@@ -53,13 +38,14 @@ public class ShowNumberActivity extends AppCompatActivity {
         finish();
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_number);
         numberTextView = findViewById(R.id.number);
-        numberTextView.setText(""+currentNumber);
+
+        currentLevel = new Level();
+        numberTextView.setText(""+currentLevel.getNumber());
     }
 
 
@@ -69,6 +55,8 @@ public class ShowNumberActivity extends AppCompatActivity {
         if (!startedDrawingActivity && !gameOver) {
             startedDrawingActivity = true;
             Intent intent = new Intent(ShowNumberActivity.this, DrawActivity.class);
+            intent.putExtra("number", currentLevel.getNumber());
+            intent.putExtra("difficulty", currentLevel.getDifficultyLevel());
             startActivityForResult(intent, DRAW_NUMBER_REQUEST);
         }
 
@@ -82,11 +70,14 @@ public class ShowNumberActivity extends AppCompatActivity {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 Log.i(Dev.TAG, "RESULT_OK onActivityResult: moving to nextNumber");
-                nextNumber();
+                currentLevel.nextNumber();
+                if ( currentLevel.isOver() ) {
+                    endTheGame(true);
+                }
             } else if (resultCode == RESULT_CANCELED ){
                 Log.i(Dev.TAG, "WRONG_ANSWER onActivityResult: Try again with the same number");
             }
-            if (!gameOver) numberTextView.setText(""+currentNumber);
+            if (!gameOver) numberTextView.setText(""+currentLevel.getNumber());
         }
 
         startedDrawingActivity = false;

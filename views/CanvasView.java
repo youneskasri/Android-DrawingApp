@@ -1,8 +1,7 @@
-package gl2.kasri.younes.paintapplication;
+package gl2.kasri.younes.paintapplication.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
@@ -19,7 +18,6 @@ class CanvasView extends View {
 
     protected Canvas canvas;
     protected Path path;
-    protected Paint paint;
     protected float density; // Screen density
 
     private float x;
@@ -28,7 +26,6 @@ class CanvasView extends View {
     public CanvasView(Context context, AttributeSet attrs) {
         super(context, attrs);
         path = new Path();
-        setPaint(Color.LTGRAY, 40f);
         density = context.getResources().getDisplayMetrics().density;
     }
 
@@ -60,13 +57,14 @@ class CanvasView extends View {
         path.lineTo(x,y);
     }
 
-    protected void setPaint(int color, float strokeWidth) {
-        paint = new Paint();
+    protected Paint makePaint(int color, float strokeWidth) {
+        Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setColor(color);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeWidth(strokeWidth);
+        return paint;
     }
 
 }

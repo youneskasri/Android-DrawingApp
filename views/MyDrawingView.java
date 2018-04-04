@@ -1,8 +1,9 @@
-package gl2.kasri.younes.paintapplication;
+package gl2.kasri.younes.paintapplication.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -11,33 +12,32 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import gl2.kasri.younes.Dev;
-import gl2.kasri.younes.Numbers;
+import gl2.kasri.younes.paintapplication.Dev;
+import gl2.kasri.younes.paintapplication.activities.DrawActivity;
+import gl2.kasri.younes.paintapplication.helpers.Circle;
+import gl2.kasri.younes.paintapplication.helpers.Level;
 
-/**
- * Created by admin on 15/02/2018.
- */
 
-public class MyPaintView extends CanvasView {
+public class MyDrawingView extends CanvasView {
 
     static final float DX = 30, DY = 30; // Tolérance dx et dy pour marquer un point
 
     private DrawActivity drawActivity; // The calling activity
 
-    private int currentNumber;
-    private int currentLevel;
+    private Level currentLevel;
 
-    private Numbers numbers; // Helper Class contenant l'ensemble des points pr chaque nombre.
+    private Paint drawingPaint;
+    private Paint pointsPaint;
 
     private List<Point>  points = null;
-    private List<Circle> circles = null;
+    private List<Circle> circles = null; // Intervalles d'acceptation ( you can make it visible if you wish )
 
-    private int remainingAttempts = 3;
 
     /** Constructor */
-    public MyPaintView(Context context, AttributeSet attributeSet){
+    public MyDrawingView(Context context, AttributeSet attributeSet){
         super(context,attributeSet);
-        numbers = new Numbers();
+        pointsPaint = makePaint(Color.BLACK, 10f);
+        drawingPaint = makePaint(Color.BLUE, 40f);
     }
 
     @Override
@@ -48,14 +48,14 @@ public class MyPaintView extends CanvasView {
             initPointsAndCircles();
         }
 
-        drawCircles();
+       // drawCircles();
         drawNumber();
-        canvas.drawPath(path, paint);
+        canvas.drawPath(path, drawingPaint);
     }
 
     private void initPointsAndCircles() {
-        points = numbers.getNumberWithPoints(currentNumber);
-        circles = new ArrayList<Circle>();
+        points = currentLevel.getNumberWithPoints();
+        circles = new ArrayList<>();
         for (Point p : points){
             circles.add( new Circle(p.x, p.y) );
         }
@@ -127,10 +127,9 @@ public class MyPaintView extends CanvasView {
     }
 
     private void checkRemainingAttempts(){
-        remainingAttempts--;
+        int remainingAttempts = currentLevel.checkRemainingAttempts();
         drawActivity.showToast("Attention ! Il vous reste " + remainingAttempts +" tentative(s)");
-
-        if (remainingAttempts == 0){
+        if ( remainingAttempts == 0 ){
             drawActivity.wrongAnswer();
         }
     }
@@ -146,7 +145,7 @@ public class MyPaintView extends CanvasView {
 
     public void clearCanvasAndRefreshPoints(){
         path.reset();
-        points = numbers.getNumberWithPoints(currentNumber);
+        points = currentLevel.getNumberWithPoints();
         invalidate();
     }
 
@@ -155,25 +154,20 @@ public class MyPaintView extends CanvasView {
         this.drawActivity = drawActivity;
     }
 
-    public void setCurrentNumber(int currentNumber){
-        this.currentNumber = currentNumber;
+    public void setCurrentLevel(Level level) {
+        currentLevel = level;
     }
-    public void setCurrentLevel(int currentLevel) { this.currentLevel = currentLevel; }
 
     private void drawNumber(){
-        paint.setColor(Color.DKGRAY);
         for (Point p : points) {
-            float radius = 0.2f * density;
-            // TODO
-            Log.i(Dev.TAG, "drawNumber: radius = "+ radius);
-            canvas.drawCircle(p.x * density, p.y * density, radius, paint);
+            float radius = currentLevel.getPointsRadius(density);
+            canvas.drawCircle(p.x * density, p.y * density, radius, pointsPaint);
         }
-        paint.setColor(Color.RED);
     }
 
     private void drawCircles(){
         for (Circle c : circles){
-            float radius = c.radius * density / currentLevel; // TODO
+            float radius = c.radius * density / currentLevel.getDifficultyLevel(); // TODO
             canvas.drawCircle(c.x * density, c.y * density, radius, c.paint);
         }
     }
