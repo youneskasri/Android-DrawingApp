@@ -39,7 +39,7 @@ public class Level implements Serializable{
     public int getDifficultyLevel() { return difficultyLevel; }
 
     public float getPointsRadius(float density){
-        return density * 0.5f;
+        return 2f * density * (Dev.MAX_LEVEL-difficultyLevel+1)  ;
     }
 
     public ArrayList<Point> getNumberWithPoints(){
