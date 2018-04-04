@@ -1,8 +1,5 @@
 package gl2.kasri.younes.paintapplication;
 
-/**
- * Created by admin on 22/03/2018.
- */
 
 public class Dev {
     public final static String TAG = "Younes Kasri";

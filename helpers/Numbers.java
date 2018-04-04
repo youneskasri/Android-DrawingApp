@@ -4,9 +4,9 @@ import android.graphics.Point;
 
 import java.util.ArrayList;
 
-public class Numbers {
+class Numbers {
 
-    public ArrayList<Point> getNumberWithPoints(int number){
+    ArrayList<Point> getNumberWithPoints(int number){
 
         ArrayList<Point> points = new ArrayList<>();
         switch(number){

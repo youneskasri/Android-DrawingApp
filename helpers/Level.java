@@ -2,19 +2,14 @@ package gl2.kasri.younes.paintapplication.helpers;
 
 import android.graphics.Point;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import gl2.kasri.younes.paintapplication.Dev;
 
-/**
- * Created by admin on 03/04/2018.
- */
-
-public class Level implements Serializable{
+public class Level {
 
     private int number;
-    protected int difficultyLevel;
+    private int difficultyLevel;
     private Numbers numbers; // Helper Class contenant l'ensemble des points pr chaque nombre.
     private int remainingAttempts = 3;
 
@@ -58,7 +53,7 @@ public class Level implements Serializable{
         }
     }
 
-    public void nextLevel(){
+    private void nextLevel(){
             difficultyLevel++;
             number = Dev.STARTING_NUMBER;
             if ( difficultyLevel > Dev.MAX_LEVEL) {
