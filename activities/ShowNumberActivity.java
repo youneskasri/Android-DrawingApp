@@ -43,7 +43,6 @@ public class ShowNumberActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_number);
         numberTextView = findViewById(R.id.number);
-
         currentLevel = new Level();
         numberTextView.setText(""+currentLevel.getNumber());
     }
