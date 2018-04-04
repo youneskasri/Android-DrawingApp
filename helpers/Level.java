@@ -21,7 +21,7 @@ public class Level implements Serializable{
     private boolean isOver;
 
     public Level(){
-        this(Dev.STARTING_LEVEL, Dev.STARTING_NUMBER);
+        this(Dev.STARTING_NUMBER, Dev.STARTING_LEVEL);
     }
 
     public Level(int number, int difficultyLevel){
