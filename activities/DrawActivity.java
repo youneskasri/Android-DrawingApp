@@ -1,19 +1,19 @@
 package gl2.kasri.younes.paintapplication.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import gl2.kasri.younes.paintapplication.Dev;
 import gl2.kasri.younes.paintapplication.R;
 import gl2.kasri.younes.paintapplication.helpers.Level;
 import gl2.kasri.younes.paintapplication.views.MyDrawingView;
 
 public class DrawActivity extends AppCompatActivity {
 
-    private MyDrawingView myDrawingView;
+    protected MyDrawingView myDrawingView;
+    private Level currentLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +22,10 @@ public class DrawActivity extends AppCompatActivity {
         myDrawingView = findViewById(R.id.canvas);
 
         int number = getIntent().getIntExtra("number", 0);
-                int difficultyLevel = getIntent().getIntExtra("difficulty", 1);
+        int difficultyLevel = getIntent().getIntExtra("difficulty", 1);
 
-        Level currentLevel = new Level(number, difficultyLevel);
-        Log.i(Dev.TAG, "onCreate: currentNumber = "+currentLevel.getNumber()+" ");
-
+        setCurrentLevel(number, difficultyLevel);
         myDrawingView.setDrawActivity(this);
-        myDrawingView.setCurrentLevel(currentLevel);
     }
 
     public void correctAnswer(){
@@ -38,10 +35,15 @@ public class DrawActivity extends AppCompatActivity {
     }
 
     public void wrongAnswer(){
-        showToast("You lost ! Try again");
+       /* showToast("You lost ! Try again");
         setResult(RESULT_CANCELED);
-        finish();
+        finish(); */
+       Intent intent = new Intent(this, ShowAnimationActivity.class);
+       intent.putExtra("number", currentLevel.getNumber());
+       intent.putExtra("difficulty", currentLevel.getDifficultyLevel());
+       startActivity(intent);
     }
+
 
     public void clearCanvas(View v){
         myDrawingView.clearCanvasAndRefreshPoints();
@@ -49,6 +51,11 @@ public class DrawActivity extends AppCompatActivity {
 
     public void showToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+
+    public void setCurrentLevel(int number, int difficultyLevel) {
+        currentLevel = new Level(number, difficultyLevel);
+        myDrawingView.setCurrentLevel(currentLevel);
     }
 
 }

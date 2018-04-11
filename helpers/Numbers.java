@@ -41,6 +41,9 @@ class Numbers {
         points.add(       new Point(155, 249));
         points.add(       new Point(155, 226));
         points.add(       new Point(168, 207));
+
+        //
+        points.add(       new Point(190, 201));
     }
 
     private void drawNumberOneWithPoints(ArrayList<Point> points){
@@ -137,6 +140,9 @@ class Numbers {
         points.add(       new Point(219, 259));
         points.add(       new Point(196, 250));
         points.add(       new Point(174, 260));
+
+        //
+        points.add(       new Point(154, 274));
     }
 
     private void drawNumberSevenWithPoints(ArrayList<Point> points){
@@ -181,5 +187,8 @@ class Numbers {
         points.add(       new Point(162, 248));
         points.add(       new Point(185, 258));
         points.add(       new Point(207, 248));
+
+        //
+        points.add(       new Point(227, 233));
     }
 }

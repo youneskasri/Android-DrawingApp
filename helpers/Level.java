@@ -11,7 +11,7 @@ public class Level {
     private int number;
     private int difficultyLevel;
     private Numbers numbers; // Helper Class contenant l'ensemble des points pr chaque nombre.
-    private int remainingAttempts = 3;
+    private int remainingAttempts = Dev.NUMBER_OF_ATTEMPTS;
 
     private boolean isOver;
 
@@ -61,4 +61,7 @@ public class Level {
             }
     }
 
+    public void refreshRemainingAttempts() {
+        remainingAttempts = Dev.NUMBER_OF_ATTEMPTS;
+    }
 }

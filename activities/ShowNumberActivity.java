@@ -17,6 +17,7 @@ public class ShowNumberActivity extends AppCompatActivity {
 
     private TextView numberTextView;
 
+   // TODO  public static Boolean DRAW_ANIMATION = false;
     protected boolean startedDrawingActivity = false;
     protected boolean gameOver = false;
 
@@ -81,5 +82,4 @@ public class ShowNumberActivity extends AppCompatActivity {
 
         startedDrawingActivity = false;
     }
-
 }

@@ -7,9 +7,6 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
 
-/**
- * Created by admin on 26/03/2018.
- */
 
 class CanvasView extends View {
 

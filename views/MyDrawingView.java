@@ -1,6 +1,7 @@
 package gl2.kasri.younes.paintapplication.views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,10 +13,11 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import gl2.kasri.younes.paintapplication.Dev;
 import gl2.kasri.younes.paintapplication.activities.DrawActivity;
 import gl2.kasri.younes.paintapplication.helpers.Circle;
 import gl2.kasri.younes.paintapplication.helpers.Level;
+
+import static gl2.kasri.younes.paintapplication.Dev.TAG;
 
 
 public class MyDrawingView extends CanvasView {
@@ -36,8 +38,8 @@ public class MyDrawingView extends CanvasView {
     /** Constructor */
     public MyDrawingView(Context context, AttributeSet attributeSet){
         super(context,attributeSet);
-        pointsPaint = makePaint(Color.BLACK, 10f);
-        drawingPaint = makePaint(Color.BLUE, 40f);
+        pointsPaint = makePaint(Color.DKGRAY, 10f);
+        drawingPaint = makePaint(Color.BLACK, 40f);
     }
 
     @Override
@@ -87,7 +89,7 @@ public class MyDrawingView extends CanvasView {
                     return true;
                 }
                 if (marquerLePoint(x,y))
-                    Log.i(Dev.TAG, "onTouchEvent: J'ai marqué le point " + x +"-"+y);
+                    Log.i(TAG, "onTouchEvent: J'ai marqué le point " + x +"-"+y);
                 moveTouch(x, y);
                 invalidate();
                 break;
@@ -131,6 +133,7 @@ public class MyDrawingView extends CanvasView {
         drawActivity.showToast("Attention ! Il vous reste " + remainingAttempts +" tentative(s)");
         if ( remainingAttempts == 0 ){
             drawActivity.wrongAnswer();
+            currentLevel.refreshRemainingAttempts();
         }
     }
 
@@ -149,6 +152,42 @@ public class MyDrawingView extends CanvasView {
         invalidate();
     }
 
+
+    public void showDrawingAnimation() { // TODO
+
+        if ( canvas == null ){
+            Bitmap bitmap = Bitmap.createBitmap(500, 380, Bitmap.Config.ARGB_8888);
+            this.canvas = new Canvas(bitmap);
+        }
+
+        Log.i(TAG, "showDrawingAnimation: canvas = "+canvas.toString());
+        initPointsAndCircles();
+        for (int i = 0, n = points.size(); i<n-1; i++){
+            /* Point A = points.get(i);
+            Point B = points.get(i+1);
+
+            canvas.drawLine(A.x * density, A.y * density,
+                    B.x * density, B.y * density, drawingPaint);
+
+            invalidate();
+
+            try { Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Point A = points.get(i);
+            Point B = points.get(i+1);
+            canvas.drawLine(A.x * density, A.y * density,
+                    B.x * density, B.y * density, drawingPaint);
+*/
+
+        //    Log.i(TAG, "showDrawingAnimation: " + A.toString() + " --> "+ B.toString());
+
+        }
+         drawCircles();
+
+    }
+
     /** The calling activity */
     public void setDrawActivity(DrawActivity drawActivity){
         this.drawActivity = drawActivity;
@@ -165,8 +204,8 @@ public class MyDrawingView extends CanvasView {
         }
     }
 
-    private void drawCircles(){
-        for (Circle c : circles){
+    private void drawCircles() {
+        for (Circle c : circles) {
             float radius = c.radius * density / currentLevel.getDifficultyLevel(); // TODO
             canvas.drawCircle(c.x * density, c.y * density, radius, c.paint);
         }
