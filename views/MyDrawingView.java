@@ -1,7 +1,6 @@
 package gl2.kasri.younes.paintapplication.views;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -39,7 +38,7 @@ public class MyDrawingView extends CanvasView {
     public MyDrawingView(Context context, AttributeSet attributeSet){
         super(context,attributeSet);
         pointsPaint = makePaint(Color.DKGRAY, 10f);
-        drawingPaint = makePaint(Color.BLACK, 40f);
+        drawingPaint = makePaint(Color.parseColor("#DB0A5B"), 40f);
     }
 
     @Override
@@ -134,6 +133,8 @@ public class MyDrawingView extends CanvasView {
         if ( remainingAttempts == 0 ){
             drawActivity.wrongAnswer();
             currentLevel.refreshRemainingAttempts();
+        } else {
+            drawActivity.playTryAgainSound();
         }
     }
 
@@ -152,41 +153,6 @@ public class MyDrawingView extends CanvasView {
         invalidate();
     }
 
-
-    public void showDrawingAnimation() { // TODO
-
-        if ( canvas == null ){
-            Bitmap bitmap = Bitmap.createBitmap(500, 380, Bitmap.Config.ARGB_8888);
-            this.canvas = new Canvas(bitmap);
-        }
-
-        Log.i(TAG, "showDrawingAnimation: canvas = "+canvas.toString());
-        initPointsAndCircles();
-        for (int i = 0, n = points.size(); i<n-1; i++){
-            /* Point A = points.get(i);
-            Point B = points.get(i+1);
-
-            canvas.drawLine(A.x * density, A.y * density,
-                    B.x * density, B.y * density, drawingPaint);
-
-            invalidate();
-
-            try { Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Point A = points.get(i);
-            Point B = points.get(i+1);
-            canvas.drawLine(A.x * density, A.y * density,
-                    B.x * density, B.y * density, drawingPaint);
-*/
-
-        //    Log.i(TAG, "showDrawingAnimation: " + A.toString() + " --> "+ B.toString());
-
-        }
-         drawCircles();
-
-    }
 
     /** The calling activity */
     public void setDrawActivity(DrawActivity drawActivity){
@@ -211,14 +177,6 @@ public class MyDrawingView extends CanvasView {
         }
     }
 
-
-      /*   protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-       super.onSizeChanged(w, h, oldw, oldh);
-
-        bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        canvas = new Canvas(bitmap);
-    }
-*/
 
 }
 

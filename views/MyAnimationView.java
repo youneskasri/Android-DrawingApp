@@ -31,7 +31,7 @@ public class MyAnimationView extends CanvasView {
     public MyAnimationView(Context context, AttributeSet attrs) {
         super(context, attrs);
         pointsPaint = makePaint(Color.DKGRAY, 10f);
-        drawingPaint = makePaint(Color.DKGRAY, 40f);
+        drawingPaint = makePaint(Color.parseColor("#DB0A5B"), 40f);
     }
 
     protected void onDraw(Canvas canvas) {
