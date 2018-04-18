@@ -35,13 +35,13 @@ public class DrawActivity extends AppCompatActivity {
         myDrawingView.setDrawActivity(this);
 
         bravoSounds = new MediaPlayer[]{
-                MediaPlayer.create(this, R.raw.bravo1),
-                MediaPlayer.create(this, R.raw.bravo2),
-                MediaPlayer.create(this, R.raw.bravo3)
+                MediaPlayer.create(this, R.raw.ar_bravo1),
+                MediaPlayer.create(this, R.raw.ar_bravo2),
+                MediaPlayer.create(this, R.raw.ar_bravo3)
         };
 
         tryAgainSounds = new MediaPlayer[]{
-                MediaPlayer.create(this, R.raw.tryagain1)
+                MediaPlayer.create(this, R.raw.ar_tryagain1)
         };
     }
 
@@ -50,7 +50,7 @@ public class DrawActivity extends AppCompatActivity {
         final AlertDialog dialog = showCustomDialog(R.layout.dialog_correct);
 
         // Play a random sound
-        int n = (int)Math.random() * bravoSounds.length; if (n==bravoSounds.length) n--;
+        int n = (int)(Math.random() * bravoSounds.length); if (n==bravoSounds.length) n--;
         bravoSounds[n].start();
 
         showToast("Good Job ! Moving to the next level");
