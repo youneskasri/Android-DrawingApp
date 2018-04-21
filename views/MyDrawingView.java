@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Point;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -33,10 +34,15 @@ public class MyDrawingView extends CanvasView {
     private List<Point>  points = null;
     private List<Circle> circles = null; // Intervalles d'acceptation ( you can make it visible if you wish )
 
+    private Path previousPath = null;
+    private List<Point> previousPoints = null;
+    private Point lastRemovedPoint;
 
     /** Constructor */
     public MyDrawingView(Context context, AttributeSet attributeSet){
         super(context,attributeSet);
+        previousPath = new Path(path);
+
         pointsPaint = makePaint(Color.DKGRAY, 10f);
         drawingPaint = makePaint(Color.parseColor("#DB0A5B"), 40f);
     }
@@ -56,10 +62,16 @@ public class MyDrawingView extends CanvasView {
 
     private void initPointsAndCircles() {
         points = currentLevel.getNumberWithPoints();
+        previousPoints = new ArrayList<>(points);
         circles = new ArrayList<>();
         for (Point p : points){
             circles.add( new Circle(p.x, p.y) );
         }
+    }
+
+    @Override
+    public boolean performClick() { /* To remove a warning ( Accessibility ) */
+        return super.performClick();
     }
 
     boolean wasOutOfBounds;
@@ -71,6 +83,7 @@ public class MyDrawingView extends CanvasView {
 
         switch(event.getAction()){
             case MotionEvent.ACTION_DOWN:
+                performClick();
                 if ( isOutOfBounds(x, y) ){
                     wasOutOfBounds = true;
                     return true;
@@ -87,8 +100,12 @@ public class MyDrawingView extends CanvasView {
                 if (wasOutOfBounds){
                     return true;
                 }
-                if (marquerLePoint(x,y))
+                if (marquerLePoint(x,y)){
                     Log.i(TAG, "onTouchEvent: J'ai marqué le point " + x +"-"+y);
+                    previousPath = new Path(path);
+                    previousPoints = new ArrayList<>(points);
+                }
+
                 moveTouch(x, y);
                 invalidate();
                 break;
@@ -118,7 +135,7 @@ public class MyDrawingView extends CanvasView {
             float dy = Math.abs(y - points.get(i).y * density);
 
             if (dx < DX  && dy < DY){
-                points.remove(i);
+                lastRemovedPoint = points.remove(i);
                 unPointEstMarque = true;
             }
 
@@ -149,7 +166,11 @@ public class MyDrawingView extends CanvasView {
 
     public void clearCanvasAndRefreshPoints(){
         path.reset();
-        points = currentLevel.getNumberWithPoints();
+
+        path = new Path(previousPath);
+        points = new ArrayList<>(previousPoints);
+        points.add(lastRemovedPoint);
+
         invalidate();
     }
 
