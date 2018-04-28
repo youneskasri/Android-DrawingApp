@@ -131,6 +131,7 @@ public class MyDrawingView extends CanvasView {
 
         boolean unPointEstMarque = false;
         for (int i = 0; i<points.size(); i++){
+            if (points.get(i)==null) continue;
             float dx = Math.abs(x - points.get(i).x * density);
             float dy = Math.abs(y - points.get(i).y * density);
 
@@ -187,7 +188,7 @@ public class MyDrawingView extends CanvasView {
     private void drawNumber(){
         for (Point p : points) {
             float radius = currentLevel.getPointsRadius(density);
-            canvas.drawCircle(p.x * density, p.y * density, radius, pointsPaint);
+            if (p!=null) canvas.drawCircle(p.x * density, p.y * density, radius, pointsPaint);
         }
     }
 

@@ -24,6 +24,7 @@ public class MyAnimationView extends CanvasView {
     private Level currentLevel;
     private Paint pointsPaint, drawingPaint;
     private Activity activity;
+    private Thread animationThread;
 
     private float x,y;
     private List<Point> points = null;
@@ -47,17 +48,30 @@ public class MyAnimationView extends CanvasView {
 
     public void playAnimation(){
 
-        avancerAnimation();
-
-        new Timer().scheduleAtFixedRate(new TimerTask(){
+        animationThread = new Thread() { //new thread
             public void run() {
-                if (points.size() > 1) {
-                    avancerAnimation();
-                } else {
-                    finAnimation(); return;
-                }
-            }
-        },0,300);
+
+                avancerAnimation();
+
+                new Timer().scheduleAtFixedRate(new TimerTask(){
+                    public void run() {
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (points.size() > 1) {
+                                    avancerAnimation();
+                                } else {
+                                    finAnimation(); return;
+                                }
+                            }
+                        });
+
+                    }
+                },0,300);
+            };
+        };
+
+        animationThread.start();
     }
 
     private void avancerAnimation() {
@@ -80,6 +94,7 @@ public class MyAnimationView extends CanvasView {
 
     private void finAnimation(){
         ((ShowAnimationActivity)this.activity).finAnimation();
+        animationThread.interrupt();
     }
 
     protected void startTouch(float x, float y){
