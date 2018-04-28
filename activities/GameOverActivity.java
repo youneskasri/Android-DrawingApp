@@ -1,19 +1,21 @@
 package gl2.kasri.younes.paintapplication.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import gl2.kasri.younes.paintapplication.R;
 
-public class GameOverActivity extends AppCompatActivity {
+public class GameOverActivity extends ChooseLanguageActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
+
+        myDrawerList = findViewById(R.id.navList);
+        addDrawerItems();
 
         ImageView imageView = findViewById(R.id.imageView);
         TextView messageTextView = findViewById(R.id.messageTextView);

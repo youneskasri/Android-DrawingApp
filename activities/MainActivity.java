@@ -2,14 +2,13 @@ package gl2.kasri.younes.paintapplication.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
 import gl2.kasri.younes.paintapplication.R;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ChooseLanguageActivity {
 
     public final static int SHOW_NUMBER_REQUEST = 100;
 
@@ -17,6 +16,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        myDrawerList = findViewById(R.id.navList);
+        addDrawerItems();
 
         Button playButton = findViewById(R.id.playButton);
 
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

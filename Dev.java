@@ -10,4 +10,9 @@ public class Dev {
     public final static int STARTING_NUMBER = 0;
 
     public final static int NUMBER_OF_ATTEMPTS = 2;
+
+
+    public final static int LANG_AR_POS = 1;
+    public final static int LANG_FR_POS = 2;
+    public final static int LANG_EN_POS = 3;
 }

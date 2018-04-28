@@ -5,7 +5,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,7 +12,7 @@ import gl2.kasri.younes.paintapplication.R;
 import gl2.kasri.younes.paintapplication.helpers.Level;
 import gl2.kasri.younes.paintapplication.views.MyDrawingView;
 
-public class DrawActivity extends AppCompatActivity {
+public class DrawActivity extends ChooseLanguageActivity {
 
     protected MyDrawingView myDrawingView;
     private Level currentLevel;
@@ -27,6 +26,9 @@ public class DrawActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw);
         myDrawingView = findViewById(R.id.canvas);
+
+        myDrawerList = findViewById(R.id.navList);
+        addDrawerItems();
 
         int number = getIntent().getIntExtra("number", 0);
         int difficultyLevel = getIntent().getIntExtra("difficulty", 1);
