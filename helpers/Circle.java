@@ -17,10 +17,16 @@ public class Circle {
         this.paint = paint;
     }
 
-    public Circle(float x, float y){
-        this(x, y, 20, new Paint());
+    private Circle(float x, float y, float radius){
+        this(x, y, radius, new Paint());
         setPaint();
     }
+
+    public Circle(float x, float y){
+        this(x, y, 1f*Dev.MAX_TOLERANCE_EASY, new Paint());
+        setPaint();
+    }
+
 
     private void setPaint() {
         paint.setColor(Color.LTGRAY);

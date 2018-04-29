@@ -25,7 +25,7 @@ public class GameOverActivity extends ChooseLanguageActivity {
         String message;
         int idImage;
 
-        if (wonTheGame){
+        if (wonTheGame || true){
             message = "Congratulations ! You won";
             idImage = R.drawable.trophy;
         } else {

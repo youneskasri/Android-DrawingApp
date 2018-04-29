@@ -22,7 +22,7 @@ import static gl2.kasri.younes.paintapplication.Dev.TAG;
 
 public class MyDrawingView extends CanvasView {
 
-    static final float DX = 30, DY = 30; // Tolérance dx et dy pour marquer un point
+   // static final float DX = 30, DY = 30; // Tolérance dx et dy pour marquer un point
 
     private DrawActivity drawActivity; // The calling activity
 
@@ -93,14 +93,14 @@ public class MyDrawingView extends CanvasView {
                 break;
             case MotionEvent.ACTION_MOVE:
                 if ( isOutOfBounds(x, y)  ){
-                    clearCanvasAndRefreshPoints();
+                    clearCanvasAndRetrievePoints();
                     wasOutOfBounds = true;
                     return true;
                 }
                 if (wasOutOfBounds){
                     return true;
                 }
-                if (marquerLePoint(x,y)){
+                if (markThePoint(x,y)){
                     Log.i(TAG, "onTouchEvent: J'ai marqué le point " + x +"-"+y);
                     previousPath = new Path(path);
                     previousPoints = new ArrayList<>(points);
@@ -127,7 +127,7 @@ public class MyDrawingView extends CanvasView {
         return true;
     }
 
-    private boolean marquerLePoint(float x, float y){
+    private boolean markThePoint(float x, float y){
 
         boolean unPointEstMarque = false;
         for (int i = 0; i<points.size(); i++){
@@ -135,7 +135,8 @@ public class MyDrawingView extends CanvasView {
             float dx = Math.abs(x - points.get(i).x * density);
             float dy = Math.abs(y - points.get(i).y * density);
 
-            if (dx < DX  && dy < DY){
+            float maxTolerance = currentLevel.getMaxTolerance();
+            if (dx < maxTolerance  && dy < maxTolerance){
                 lastRemovedPoint = points.remove(i);
                 unPointEstMarque = true;
             }
@@ -165,13 +166,21 @@ public class MyDrawingView extends CanvasView {
         return true;
     }
 
-    public void clearCanvasAndRefreshPoints(){
+    public void clearCanvasAndRetrievePoints(){
         path.reset();
 
         path = new Path(previousPath);
         points = new ArrayList<>(previousPoints);
         points.add(lastRemovedPoint);
 
+        invalidate();
+    }
+
+    public void clearCanvas(){
+        path.reset();
+        previousPath = new Path(path);
+
+        points = currentLevel.getNumberWithPoints();
         invalidate();
     }
 

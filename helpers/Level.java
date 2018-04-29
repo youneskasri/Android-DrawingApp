@@ -12,7 +12,6 @@ public class Level {
     private int difficultyLevel;
     private Numbers numbers; // Helper Class contenant l'ensemble des points pr chaque nombre.
     private int remainingAttempts = Dev.NUMBER_OF_ATTEMPTS;
-
     private boolean isOver;
 
     public Level(){
@@ -63,6 +62,18 @@ public class Level {
             if ( difficultyLevel > Dev.MAX_LEVEL) {
                 isOver = true;
             }
+    }
+
+    public float getNumbersFontSize(){
+        float fontSize = Dev.FONT_SIZE_EASY;
+        if (difficultyLevel == 2){
+            fontSize -= 100;
+        }
+        return fontSize;
+    }
+
+    public float getMaxTolerance(){
+        return Dev.MAX_TOLERANCE_EASY/difficultyLevel;
     }
 
     public void refreshRemainingAttempts() {

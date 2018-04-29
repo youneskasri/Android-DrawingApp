@@ -84,8 +84,8 @@ public class DrawActivity extends ChooseLanguageActivity {
         tryAgainSounds[0].start();
     }
 
-    public void clearCanvas(View v){
-        myDrawingView.clearCanvasAndRefreshPoints();
+    public void clearCanvas(View v) {
+        myDrawingView.clearCanvas();
     }
 
     public void showToast(String text) {

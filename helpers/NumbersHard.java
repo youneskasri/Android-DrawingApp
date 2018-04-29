@@ -4,29 +4,13 @@ import android.graphics.Point;
 
 import java.util.ArrayList;
 
-abstract class Numbers {
+/**
+ * Created by admin on 29/04/2018.
+ */
 
-    ArrayList<Point> getNumberWithPoints(int number){
+public class NumbersHard extends Numbers {
 
-        ArrayList<Point> points = new ArrayList<>();
-        switch(number){
-            case 0 : drawNumberZeroWithPoints(points); break;
-            case 1 : drawNumberOneWithPoints(points); break;
-            case 2 : drawNumberTwoWithPoints(points); break;
-            case 3 : drawNumberThreeWithPoints(points); break;
-            case 4 : drawNumberFourWithPoints(points); break;
-            case 5 : drawNumberFiveWithPoints(points); break;
-            case 6 : drawNumberSixWithPoints(points); break;
-            case 7 : drawNumberSevenWithPoints(points); break;
-            case 8 : drawNumberEightWithPoints(points); break;
-            case 9 : drawNumberNineWithPoints(points); break;
-        }
-
-        return  points;
-    }
-
-
-    protected abstract void drawNumberZeroWithPoints(ArrayList<Point> points); /*{
+    protected void drawNumberZeroWithPoints(ArrayList<Point> points){
         points.add(       new Point(190, 201));
         points.add(       new Point(213, 207));
         points.add(       new Point(223, 226));
@@ -44,9 +28,9 @@ abstract class Numbers {
 
         //
         points.add(       new Point(190, 201));
-    }*/
+    }
 
-    protected abstract void drawNumberOneWithPoints(ArrayList<Point> points);/*{
+    protected void drawNumberOneWithPoints(ArrayList<Point> points){
 
         points.add(       new Point(156, 216));
         points.add(       new Point(177, 208));
@@ -57,9 +41,9 @@ abstract class Numbers {
         points.add(       new Point(197, 289));
         points.add(       new Point(198, 312));
 
-    }*/
+    }
 
-    protected abstract void drawNumberTwoWithPoints(ArrayList<Point> points); /*{
+    protected void drawNumberTwoWithPoints(ArrayList<Point> points){
 
         points.add(       new Point(147, 223));
         points.add(       new Point(160, 202));
@@ -75,9 +59,9 @@ abstract class Numbers {
         points.add(       new Point(210, 322));
         points.add(       new Point(232, 322));
 
-    }*/
+    }
 
-    protected abstract void drawNumberThreeWithPoints(ArrayList<Point> points);/*{
+    protected void drawNumberThreeWithPoints(ArrayList<Point> points){
         points.add(     new Point(        151,215));
         points.add(     new Point(        171,195));
         points.add(     new Point(        198,190));
@@ -91,9 +75,9 @@ abstract class Numbers {
         points.add(     new Point(           189,313));
         points.add(     new Point(          164,305));
         points.add(     new Point(          149,285));
-    }*/
+    }
 
-    protected abstract void drawNumberFourWithPoints(ArrayList<Point> points);/*{
+    protected void drawNumberFourWithPoints(ArrayList<Point> points){
 
         points.add(       new Point(207, 313));
         points.add(       new Point(207, 290));
@@ -108,9 +92,9 @@ abstract class Numbers {
         points.add(       new Point(     139, 276));
         points.add(       new Point(     170, 277));
         points.add(       new Point(      228, 277));
-    }*/
+    }
 
-    protected abstract void drawNumberFiveWithPoints(ArrayList<Point> points);/*{
+    protected void drawNumberFiveWithPoints(ArrayList<Point> points){
         points.add(       new Point(152,300));
         points.add(       new Point(169,320));
         points.add(       new Point(198,320));
@@ -124,9 +108,9 @@ abstract class Numbers {
         points.add(       new Point(179,203));
         points.add(       new Point(201,203));
         points.add(       new Point(224,202));
-    }*/
+    }
 
-    protected  abstract void drawNumberSixWithPoints(ArrayList<Point> points); /*{
+    protected void drawNumberSixWithPoints(ArrayList<Point> points){
         points.add(       new Point(215, 200));
         points.add(       new Point(187, 205));
         points.add(       new Point(164, 222));
@@ -143,9 +127,9 @@ abstract class Numbers {
 
         //
         points.add(       new Point(154, 274));
-    }*/
+    }
 
-    protected abstract void drawNumberSevenWithPoints(ArrayList<Point> points); /*{
+    protected void drawNumberSevenWithPoints(ArrayList<Point> points){
         points.add(       new Point(145, 208));
         points.add(       new Point(177, 208));
         points.add(       new Point(205, 208));
@@ -155,7 +139,7 @@ abstract class Numbers {
         points.add(       new Point(199, 279));
         points.add(       new Point(188, 304));
         points.add(       new Point(178, 328));
-    }*/
+    }
 
     private void drawNumberEightWithPoints(ArrayList<Point> points){
         points.add(       new Point(190, 194));
@@ -173,7 +157,7 @@ abstract class Numbers {
         points.add(       new Point(220, 293));
     }
 
-    protected abstract void drawNumberNineWithPoints(ArrayList<Point> points); /*{
+    protected void drawNumberNineWithPoints(ArrayList<Point> points){
         points.add(       new Point(166, 305));
         points.add(       new Point(194, 301));
         points.add(       new Point(216, 286));
@@ -190,5 +174,5 @@ abstract class Numbers {
 
         //
         points.add(       new Point(227, 233));
-    }*/
+    }
 }

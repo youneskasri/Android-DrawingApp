@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
@@ -39,13 +40,19 @@ public class ShowNumberActivity extends AppCompatActivity {
         finish();
     }
 
+    private void updateNumberTextView() {
+        numberTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,currentLevel.getNumbersFontSize());
+        numberTextView.setText(""+currentLevel.getNumber());
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_number);
         numberTextView = findViewById(R.id.number);
         currentLevel = new Level();
-        numberTextView.setText(""+currentLevel.getNumber());
+        updateNumberTextView();
     }
 
 
@@ -77,9 +84,13 @@ public class ShowNumberActivity extends AppCompatActivity {
             } else if (resultCode == RESULT_CANCELED ){
                 Log.i(Dev.TAG, "WRONG_ANSWER onActivityResult: Try again with the same number");
             }
-            if (!gameOver) numberTextView.setText(""+currentLevel.getNumber());
+            if (!gameOver) {
+                updateNumberTextView();
+            }
         }
 
         startedDrawingActivity = false;
     }
+
+
 }
