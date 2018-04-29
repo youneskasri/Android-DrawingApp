@@ -23,7 +23,11 @@ public class Level {
         super();
         this.number = number;
         this.difficultyLevel = difficultyLevel;
-        numbers = new Numbers();
+        switch(difficultyLevel){
+            case 1: numbers = new NumbersEasy();
+            //default: numbers = new Numbers();
+        }
+        numbers = new NumbersEasy();
         isOver = false;
     }
 

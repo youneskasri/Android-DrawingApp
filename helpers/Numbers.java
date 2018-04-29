@@ -4,7 +4,7 @@ import android.graphics.Point;
 
 import java.util.ArrayList;
 
-class Numbers {
+abstract class Numbers {
 
     ArrayList<Point> getNumberWithPoints(int number){
 
@@ -26,7 +26,7 @@ class Numbers {
     }
 
 
-    private void drawNumberZeroWithPoints(ArrayList<Point> points){
+    public abstract void drawNumberZeroWithPoints(ArrayList<Point> points); /*{
         points.add(       new Point(190, 201));
         points.add(       new Point(213, 207));
         points.add(       new Point(223, 226));
@@ -44,7 +44,7 @@ class Numbers {
 
         //
         points.add(       new Point(190, 201));
-    }
+    }*/
 
     private void drawNumberOneWithPoints(ArrayList<Point> points){
 
