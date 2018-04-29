@@ -223,7 +223,7 @@ public class NumbersEasy extends Numbers {
         points.add(new Point(259, 184));
         points.add(new Point(250, 207));
         points.add(new Point(237, 230));
-        points.add(new Point(226, 225));
+        points.add(new Point(226, 254));
         points.add(new Point(214, 280));
         points.add(new Point(205, 303));
         points.add(new Point(193, 329));

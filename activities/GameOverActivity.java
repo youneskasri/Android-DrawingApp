@@ -26,7 +26,7 @@ public class GameOverActivity extends ChooseLanguageActivity {
         int idImage;
 
         if (wonTheGame || true){
-            message = "Congratulations ! You won";
+            //message = "Congratulations ! You won";
             idImage = R.drawable.trophy;
         } else {
             /* is never reached in this version b/c
@@ -35,7 +35,7 @@ public class GameOverActivity extends ChooseLanguageActivity {
             idImage = R.drawable.cross;
         }
 
-        messageTextView.setText(message);
+        //messageTextView.setText(message);
         imageView.setImageResource(idImage);
     }
 

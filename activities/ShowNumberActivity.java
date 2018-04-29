@@ -17,8 +17,9 @@ public class ShowNumberActivity extends AppCompatActivity {
     public final static int DRAW_NUMBER_REQUEST = 200;  // The request code
 
     private TextView numberTextView;
+    private TextView levelTextView;
+    private TextView numberNameTextView;
 
-   // TODO  public static Boolean DRAW_ANIMATION = false;
     protected boolean startedDrawingActivity = false;
     protected boolean gameOver = false;
 
@@ -40,9 +41,45 @@ public class ShowNumberActivity extends AppCompatActivity {
         finish();
     }
 
-    private void updateNumberTextView() {
+    private void updateShowNumberLayout() {
         numberTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,currentLevel.getNumbersFontSize());
-        numberTextView.setText(""+currentLevel.getNumber());
+
+        int number = currentLevel.getNumber();
+        numberTextView.setText(""+number);
+        numberNameTextView.setText(getStringIdFromNumber(number));
+        levelTextView.setText(getLevelName(currentLevel));
+    }
+
+    private int getLevelName(Level currentLevel) {
+        int levelName = R.string.level_easy;
+        if (currentLevel.getDifficultyLevel() == 2)
+            levelName = R.string.hard_level;
+
+        return levelName;
+    }
+
+    private int getStringIdFromNumber(int number) {
+        int id = R.string.number_zero;
+        if (number == 1)
+            id = R.string.number_one;
+        else if (number == 2)
+            id = R.string.number_two;
+        else if (number == 3)
+            id = R.string.number_three;
+        else if (number == 4)
+            id = R.string.number_four;
+        else if (number == 5)
+            id = R.string.number_five;
+        else if (number == 6)
+            id = R.string.number_six;
+        else if (number == 7)
+            id = R.string.number_seven;
+        else if (number == 8)
+            id = R.string.number_eight;
+        else if (number == 9)
+            id = R.string.number_nine;
+
+        return id;
     }
 
 
@@ -50,9 +87,13 @@ public class ShowNumberActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_number);
+
+        levelTextView = findViewById(R.id.levelTextView);
         numberTextView = findViewById(R.id.number);
+        numberNameTextView = findViewById(R.id.numberNameTextView);
+
         currentLevel = new Level();
-        updateNumberTextView();
+        updateShowNumberLayout();
     }
 
 
@@ -85,7 +126,7 @@ public class ShowNumberActivity extends AppCompatActivity {
                 Log.i(Dev.TAG, "WRONG_ANSWER onActivityResult: Try again with the same number");
             }
             if (!gameOver) {
-                updateNumberTextView();
+                updateShowNumberLayout();
             }
         }
 
