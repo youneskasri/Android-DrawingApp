@@ -17,7 +17,7 @@ public class Circle {
         this.paint = paint;
     }
 
-    private Circle(float x, float y, float radius){
+    public Circle(float x, float y, float radius){
         this(x, y, radius, new Paint());
         setPaint();
     }

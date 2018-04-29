@@ -65,7 +65,8 @@ public class MyDrawingView extends CanvasView {
         previousPoints = new ArrayList<>(points);
         circles = new ArrayList<>();
         for (Point p : points){
-            circles.add( new Circle(p.x, p.y) );
+            float radius = currentLevel.getMaxTolerance();
+            circles.add( new Circle(p.x, p.y, radius) );
         }
     }
 
@@ -201,6 +202,8 @@ public class MyDrawingView extends CanvasView {
         }
     }
 
+
+    @Deprecated
     private void drawCircles() {
         for (Circle c : circles) {
             float radius = c.radius * density / currentLevel.getDifficultyLevel(); // TODO

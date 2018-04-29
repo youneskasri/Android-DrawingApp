@@ -4,9 +4,6 @@ import android.graphics.Point;
 
 import java.util.ArrayList;
 
-/**
- * Created by admin on 29/04/2018.
- */
 
 public class NumbersHard extends Numbers {
 

@@ -23,10 +23,10 @@ public class Level {
         this.number = number;
         this.difficultyLevel = difficultyLevel;
         switch(difficultyLevel){
-            case 1: numbers = new NumbersEasy();
+            case 1: numbers = new NumbersEasy(); break;
             //default: numbers = new Numbers();
+            default: numbers = new NumbersHard(); break;
         }
-        numbers = new NumbersEasy();
         isOver = false;
     }
 
