@@ -138,23 +138,30 @@ public class NumbersHard extends Numbers {
         points.add(       new Point(178, 328));
     }
 
-    private void drawNumberEightWithPoints(ArrayList<Point> points){
-        points.add(       new Point(190, 194));
-        points.add(       new Point(160, 208));
-        points.add(       new Point(220, 208));
-        points.add(       new Point(160, 234));
-        points.add(       new Point(220, 234));
+    protected void drawNumberEightWithPoints(ArrayList<Point> points){
 
-        points.add(       new Point(190, 251));
+        points.add(new Point(194, 174));
+        points.add(new Point(228, 186));
+        points.add(new Point(231, 220));
+        points.add(new Point(194, 237));
 
-        points.add(       new Point(190, 308));
-        points.add(       new Point(160, 268));
-        points.add(       new Point(220, 268));
-        points.add(       new Point(160, 293));
-        points.add(       new Point(220, 293));
+        points.add(new Point(165, 254));
+        points.add(new Point(153, 279));
+        points.add(new Point(168, 307));
+        points.add(new Point(196, 317));
+        points.add(new Point(224, 306));
+        points.add(new Point(236, 280));
+        points.add(new Point(225, 255));
+
+
+        points.add(new Point(163, 219));
+        points.add(new Point(164, 191));
+        //
+        points.add(new Point(194, 174));
     }
 
     protected void drawNumberNineWithPoints(ArrayList<Point> points){
+
         points.add(       new Point(166, 305));
         points.add(       new Point(194, 301));
         points.add(       new Point(216, 286));

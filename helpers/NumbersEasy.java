@@ -231,6 +231,37 @@ public class NumbersEasy extends Numbers {
         points.add(new Point(171, 380));
     }
 
+    protected void drawNumberEightWithPoints(ArrayList<Point> points){
+
+        points.add(new Point(190, 132));
+        points.add(new Point(222, 136));
+        points.add(new Point(242, 153));
+        points.add(new Point(248, 176));
+        points.add(new Point(245, 201));
+        points.add(new Point(223, 216));
+        points.add(new Point(191, 223));
+        points.add(new Point(147, 239));
+        points.add(new Point(129, 263));
+        points.add(new Point(121, 286));
+        points.add(new Point(127, 314));
+        points.add(new Point(144, 337));
+        points.add(new Point(165, 348));
+        points.add(new Point(191, 351));
+        points.add(new Point(218, 347));
+        points.add(new Point(240, 334));
+        points.add(new Point(255, 315));
+        points.add(new Point(260, 287));
+        points.add(new Point(258, 261));
+        points.add(new Point(235, 236));
+        points.add(new Point(160, 218));
+        points.add(new Point(139, 203));
+        points.add(new Point(130, 177));
+        points.add(new Point(141, 152));
+        points.add(new Point(162, 135));
+        points.add(new Point(190, 130));
+
+    }
+
     protected void drawNumberNineWithPoints(ArrayList<Point> points){
 
         points.add(new Point(139, 358));
