@@ -12,7 +12,8 @@ public class GameStatistics {
     }
 
     /* To Retrive Data From DB and Tests */
-    public GameStatistics(String nombre_operation_reuss, String nombre_operation_echou, String minimum_temps_operation_sec, String moyen_temps_operation_sec) {
+    public GameStatistics(String nombre_operation_reuss, String nombre_operation_echou,
+                          String minimum_temps_operation_sec, String moyen_temps_operation_sec) {
         this.nbCorrectAnswers = Integer.parseInt(nombre_operation_reuss);
         this.nbWrongAnswers = Integer.parseInt(nombre_operation_echou);
         this.minTimeInSeconds = Integer.parseInt(minimum_temps_operation_sec);
@@ -23,15 +24,17 @@ public class GameStatistics {
     /* calculer moy et avg temps */
     public void moyenneEtMinimumTemps(){
         Long sum = 0L;
-        Long min = tempsPourChaqueNombre[0] == null ? 999 : tempsPourChaqueNombre[0];
-        for (int i = 0; i < tempsPourChaqueNombre.length; i++){
-            if (tempsPourChaqueNombre[i]==null || tempsPourChaqueNombre[i]==0) break;
-            sum += tempsPourChaqueNombre[i];
+        Long min = Long.MAX_VALUE;
+
+        int i = 0;
+        while ( tempsPourChaqueNombre[i]!=null && tempsPourChaqueNombre[i]!=0 && i < tempsPourChaqueNombre.length){
             if (tempsPourChaqueNombre[i] < min)  min = tempsPourChaqueNombre[i];
+            sum += tempsPourChaqueNombre[i];
+            i++;
         }
 
-        avgTimeInSeconds = (int) (sum / tempsPourChaqueNombre.length / 1000);
         minTimeInSeconds = (int) (min / 1000);
+        avgTimeInSeconds = (int) (sum/i/1000);
     }
 
     public void clearResults() {

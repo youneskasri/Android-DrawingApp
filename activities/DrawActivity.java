@@ -39,13 +39,13 @@ public class DrawActivity extends ChooseLanguageActivity {
         myDrawingView.setDrawActivity(this);
 
         bravoSounds = new MediaPlayer[]{
-                MediaPlayer.create(this, R.raw.ar_bravo1),
-                MediaPlayer.create(this, R.raw.ar_bravo2),
-                MediaPlayer.create(this, R.raw.ar_bravo3)
+                MediaPlayer.create(this, R.raw.bravo1),
+                MediaPlayer.create(this, R.raw.bravo2),
+                MediaPlayer.create(this, R.raw.bravo3)
         };
 
         tryAgainSounds = new MediaPlayer[]{
-                MediaPlayer.create(this, R.raw.ar_tryagain1)
+                MediaPlayer.create(this, R.raw.tryagain1)
         };
     }
 

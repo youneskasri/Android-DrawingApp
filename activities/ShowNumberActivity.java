@@ -136,15 +136,13 @@ public class ShowNumberActivity extends AppCompatActivity {
                 t1 = t2;
 
                 /* nbr Operation Echoue ? */
-                int nbrOperationsEchoue = getIntent()
-                        .getIntExtra("nbrOperationsEchoue", 0);
+                int nbrOperationsEchoue = data.getIntExtra("nbrOperationsEchoue", 0);
                 game.operationEchoue(nbrOperationsEchoue);
-                Log.i("STATS", "onActivityResult: game.getGameStatistics().getNbWrongAnswers()=="+game.getGameStatistics().getNbWrongAnswers());
+
                 /* if new Level */
                 if (currentLevel.getNumber()==0){
                     game.finDuNiveau();
-                    //TODO game = new Game(this, currentLevel);
-                   t1 = game.getGameInfo().getLevelStartTime().getTime();
+                    t1 = game.getGameInfo().getLevelStartTime().getTime();
                 }
 
                 if ( currentLevel.isOver() ) {
