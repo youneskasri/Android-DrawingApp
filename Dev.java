@@ -5,7 +5,7 @@ public class Dev {
     public final static String TAG = "Younes Kasri";
     public final static String ID_EXERCICE = "T_5_36";
 
-    public final static int MAX_NUMBER = 1;
+    public final static int MAX_NUMBER = 0;
     public final static int MAX_LEVEL = 2;
 
     public final static int STARTING_LEVEL = 1;

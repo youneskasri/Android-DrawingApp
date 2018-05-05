@@ -20,6 +20,7 @@ public class ShowNumberActivity extends AppCompatActivity {
     public final static int DRAW_NUMBER_REQUEST = 200;  // The request code
 
     Game game;
+    Long t1, t2;
 
     private TextView numberTextView;
     private TextView levelTextView;
@@ -119,7 +120,6 @@ public class ShowNumberActivity extends AppCompatActivity {
         return true;
     }
 
-    Long t1, t2;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -139,16 +139,15 @@ public class ShowNumberActivity extends AppCompatActivity {
                 int nbrOperationsEchoue = getIntent()
                         .getIntExtra("nbrOperationsEchoue", 0);
                 game.operationEchoue(nbrOperationsEchoue);
-
+                Log.i("STATS", "onActivityResult: game.getGameStatistics().getNbWrongAnswers()=="+game.getGameStatistics().getNbWrongAnswers());
                 /* if new Level */
                 if (currentLevel.getNumber()==0){
                     game.finDuNiveau();
-                   // TODO game = new Game(this, currentLevel);
-                   // TODO t1 = game.getGameInfo().getLevelStartTime().getTime();
+                    //TODO game = new Game(this, currentLevel);
+                   t1 = game.getGameInfo().getLevelStartTime().getTime();
                 }
 
                 if ( currentLevel.isOver() ) {
-                    game.finDuNiveau();
                     endTheGame(true);
                 }
             } else if (resultCode == RESULT_CANCELED ){

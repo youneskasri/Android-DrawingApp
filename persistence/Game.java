@@ -2,10 +2,10 @@ package gl2.kasri.younes.paintapplication.persistence;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import gl2.kasri.younes.paintapplication.activities.ShowNumberActivity;
 import gl2.kasri.younes.paintapplication.helpers.Level;
-
-import static android.content.ContentValues.TAG;
 
 
 public class Game {
@@ -28,6 +28,25 @@ public class Game {
         gameDatabaseHandler = new GameDatabaseHandler(showNumberActivity);
     }
 
+    /* To Retrieve Data from DB (for Tests) */
+    public Game(String id_accompagnant, String id_apprenant, boolean flag, GameInfo gameInfo, DeviceInfo deviceInfo, GameStatistics gameStatistics) {
+        this.id_accompagnant = id_accompagnant;
+        this.id_apprenant = id_apprenant;
+        this.flag = flag;
+        this.gameInfo = gameInfo;
+        this.deviceInfo = deviceInfo;
+        this.gameStatistics = gameStatistics;
+    }
+    public String toString(){
+        return "this.id_accompagnant =" + id_accompagnant+
+        "this.id_apprenant =" + id_apprenant+
+        "this.flag =" + flag+
+        " > this.gameInfo =" + gameInfo+
+        " >> this.deviceInfo ="+ deviceInfo+
+        " >>> this.gameStatistics ="+ gameStatistics;
+    }
+
+
     private void clearPreviousResults(){
         gameStatistics.clearResults();
         gameInfo.clearResults();
@@ -38,9 +57,10 @@ public class Game {
         gameInfo.setHeureFin();
         gameStatistics.moyenneEtMinimumTemps();
         gameDatabaseHandler.addResults(this);
-        clearPreviousResults();
         afficherResultatsDuNiveau();
+        clearPreviousResults();
     }
+
 
     public void operationEchoue(int nbrOperationsEchoue){
         gameStatistics.setNbWrongAnswers( gameStatistics.getNbWrongAnswers() + nbrOperationsEchoue);
@@ -53,12 +73,13 @@ public class Game {
 
         gameStatistics.getTempsPourChaqueNombre()[currentNumber]=temps;
 
-        Log.i(TAG, "operationReussie pour "+ currentNumber+" en "+ temps/1000+" secondes");
+        Log.i(gameTAG, "operationReussie pour "+ currentNumber+" en "+ gameStatistics.getTempsPourChaqueNombre()[currentNumber]/1000+" secondes");
     }
 
 
     String gameTAG = "GAME";
     public void afficherResultatsDuNiveau(){
+
         Log.i(gameTAG, "afficherResultatsDuNiveau: ");
         Log.i(gameTAG, "ID Niveau = "+ gameInfo.getId_niveau());
         Log.i(gameTAG, "@MAC device = "+ deviceInfo.getMacAddress());
@@ -67,12 +88,32 @@ public class Game {
         Log.i(gameTAG, "Nombre Operations Reussi = " + gameStatistics.getNbCorrectAnswers());
         Log.i(gameTAG, "Nombre Operations Echoue = " + gameStatistics.getNbWrongAnswers());
         for(int i = 0; i< gameStatistics.getTempsPourChaqueNombre().length; i++){
+            if (gameStatistics.getTempsPourChaqueNombre()[i]==null) break;
             Log.i(gameTAG, "Chiffre="+i+", en "+(gameStatistics.getTempsPourChaqueNombre()[i]/1000)+" secondes");
         }
         Log.i(gameTAG, "Min Temps="+ gameStatistics.getMinTimeInSeconds());
         Log.i(gameTAG, "Moy Temps="+ gameStatistics.getAvgTimeInSeconds());
-    }
 
+
+
+        Log.i(gameTAG," ###__________FROM DATABASE____________###");
+        ArrayList<Game> dbResults = gameDatabaseHandler.getAllRecord();
+        for(Game g : dbResults){
+            GameInfo info = g.gameInfo;
+            DeviceInfo device = g.getDeviceInfo();
+            GameStatistics stats = g.getGameStatistics();
+
+            Log.i(gameTAG, "afficherResultatsDuNiveau: ");
+            Log.i(gameTAG, "ID Niveau = "+ info.getId_niveau());
+            Log.i(gameTAG, "@MAC device = "+ device.getMacAddress());
+            Log.i(gameTAG, "HeureDebut = "+ info.levelStartTime);
+            Log.i(gameTAG, "HeureFin = " + info.levelFinishTime);
+            Log.i(gameTAG, "Nombre Operations Reussi = " + stats.getNbCorrectAnswers());
+            Log.i(gameTAG, "Nombre Operations Echoue = " + stats.getNbWrongAnswers());
+            Log.i(gameTAG, "Min Temps="+ gameStatistics.getMinTimeInSeconds());
+            Log.i(gameTAG, "Moy Temps="+ gameStatistics.getAvgTimeInSeconds());
+        }
+    }
 
 
 

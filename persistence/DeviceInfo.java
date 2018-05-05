@@ -26,6 +26,12 @@ public class DeviceInfo {
         getLocationData();
     }
 
+    /* To Retrieve Data From DB and Tests */
+    public DeviceInfo(String mac_device, String longitude, String latitude) {
+    }
+
+
+
     private String getMacAddr() {
         try {
             List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());

@@ -11,10 +11,19 @@ public class GameStatistics {
     public GameStatistics() {
     }
 
+    /* To Retrive Data From DB and Tests */
+    public GameStatistics(String nombre_operation_reuss, String nombre_operation_echou, String minimum_temps_operation_sec, String moyen_temps_operation_sec) {
+        this.nbCorrectAnswers = Integer.parseInt(nombre_operation_reuss);
+        this.nbWrongAnswers = Integer.parseInt(nombre_operation_echou);
+        this.minTimeInSeconds = Integer.parseInt(minimum_temps_operation_sec);
+        this.avgTimeInSeconds = Integer.parseInt(moyen_temps_operation_sec);
+    }
+
+
     /* calculer moy et avg temps */
     public void moyenneEtMinimumTemps(){
         Long sum = 0L;
-        Long min = tempsPourChaqueNombre[0];
+        Long min = tempsPourChaqueNombre[0] == null ? 999 : tempsPourChaqueNombre[0];
         for (int i = 0; i < tempsPourChaqueNombre.length; i++){
             if (tempsPourChaqueNombre[i]==null || tempsPourChaqueNombre[i]==0) break;
             sum += tempsPourChaqueNombre[i];

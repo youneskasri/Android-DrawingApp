@@ -14,6 +14,19 @@ public class GameInfo {
     Date levelStartTime; /* lors de l'instanciation */
     Date levelFinishTime; /* lors de finDuJeu() */
 
+
+    /* To Retrieve Data from DB and Tests */
+    public GameInfo(String id_application, String id_exercice, Date levelStartTime, Date levelFinishTime, String id_level){
+        this.id_application = id_application;
+        this.id_exercice = id_exercice;
+        this.levelStartTime = levelStartTime;
+        this.levelFinishTime = levelFinishTime;
+        String diff = id_level.substring(id_level.length()-1);
+        int difficultyLevel = Integer.parseInt(diff);
+        currentLevel = new Level(0, difficultyLevel);
+    }
+
+
     public void clearResults() {
         levelStartTime = new Date();
         levelFinishTime = null;
