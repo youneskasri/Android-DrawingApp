@@ -21,6 +21,8 @@ public class DrawActivity extends ChooseLanguageActivity {
     protected MediaPlayer[] bravoSounds;
     protected MediaPlayer[] tryAgainSounds;
 
+    private int nbrOperationsEchoue = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +62,9 @@ public class DrawActivity extends ChooseLanguageActivity {
         Runnable endTheActivity =  new Runnable() {
             public void run() {
                 dialog.dismiss();
-                setResult(RESULT_OK);
+                Intent intent = new Intent();
+                intent.putExtra("nbrOperationsEchoue", nbrOperationsEchoue);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         };
@@ -72,6 +76,8 @@ public class DrawActivity extends ChooseLanguageActivity {
        /* showToast("You lost ! Try again");
         setResult(RESULT_CANCELED);
         finish(); */
+
+       nbrOperationsEchoue++;
 
        playTryAgainSound();
        Intent intent = new Intent(this, ShowAnimationActivity.class);

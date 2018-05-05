@@ -8,13 +8,18 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
+import java.util.Date;
+
 import gl2.kasri.younes.paintapplication.Dev;
 import gl2.kasri.younes.paintapplication.R;
 import gl2.kasri.younes.paintapplication.helpers.Level;
+import gl2.kasri.younes.paintapplication.persistence.Game;
 
 public class ShowNumberActivity extends AppCompatActivity {
 
     public final static int DRAW_NUMBER_REQUEST = 200;  // The request code
+
+    Game game;
 
     private TextView numberTextView;
     private TextView levelTextView;
@@ -93,7 +98,10 @@ public class ShowNumberActivity extends AppCompatActivity {
         numberNameTextView = findViewById(R.id.numberNameTextView);
 
         currentLevel = new Level();
+        game = new Game(this, currentLevel);
         updateShowNumberLayout();
+
+        t1 = game.getGameInfo().getLevelStartTime().getTime();
     }
 
 
@@ -111,6 +119,8 @@ public class ShowNumberActivity extends AppCompatActivity {
         return true;
     }
 
+    Long t1, t2;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
@@ -119,7 +129,26 @@ public class ShowNumberActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Log.i(Dev.TAG, "RESULT_OK onActivityResult: moving to nextNumber");
                 currentLevel.nextNumber();
+
+                /* Operation Réussie */
+                t2 = new Date().getTime();
+                game.operationReussie(t2 - t1);
+                t1 = t2;
+
+                /* nbr Operation Echoue ? */
+                int nbrOperationsEchoue = getIntent()
+                        .getIntExtra("nbrOperationsEchoue", 0);
+                game.operationEchoue(nbrOperationsEchoue);
+
+                /* if new Level */
+                if (currentLevel.getNumber()==0){
+                    game.finDuNiveau();
+                   // TODO game = new Game(this, currentLevel);
+                   // TODO t1 = game.getGameInfo().getLevelStartTime().getTime();
+                }
+
                 if ( currentLevel.isOver() ) {
+                    game.finDuNiveau();
                     endTheGame(true);
                 }
             } else if (resultCode == RESULT_CANCELED ){
@@ -132,6 +161,5 @@ public class ShowNumberActivity extends AppCompatActivity {
 
         startedDrawingActivity = false;
     }
-
 
 }
