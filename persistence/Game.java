@@ -83,6 +83,8 @@ public class Game {
         Log.i(gameTAG, "afficherResultatsDuNiveau: ");
         Log.i(gameTAG, "ID Niveau = "+ gameInfo.getId_niveau());
         Log.i(gameTAG, "@MAC device = "+ deviceInfo.getMacAddress());
+        Log.i(gameTAG, "Lng = "+ deviceInfo.getLongitude());
+        Log.i(gameTAG, "Lat = "+ deviceInfo.getLatitude());
         Log.i(gameTAG, "HeureDebut = "+ gameInfo.levelStartTime);
         Log.i(gameTAG, "HeureFin = " + gameInfo.levelFinishTime);
         Log.i(gameTAG, "Nombre Operations Reussi = " + gameStatistics.getNbCorrectAnswers());
@@ -106,6 +108,8 @@ public class Game {
             Log.i(gameTAG, "afficherResultatsDuNiveau: ");
             Log.i(gameTAG, "ID Niveau = "+ info.getId_niveau());
             Log.i(gameTAG, "@MAC device = "+ device.getMacAddress());
+            Log.i(gameTAG, "Lng = "+ device.getLongitude());
+            Log.i(gameTAG, "Lat = "+ device.getLatitude());
             Log.i(gameTAG, "HeureDebut = "+ info.levelStartTime);
             Log.i(gameTAG, "HeureFin = " + info.levelFinishTime);
             Log.i(gameTAG, "Nombre Operations Reussi = " + stats.getNbCorrectAnswers());

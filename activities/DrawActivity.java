@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.widget.Toast;
 
 import gl2.kasri.younes.paintapplication.R;
 import gl2.kasri.younes.paintapplication.helpers.Level;
@@ -61,7 +60,7 @@ public class DrawActivity extends ChooseLanguageActivity {
 
         Runnable endTheActivity =  new Runnable() {
             public void run() {
-                dialog.dismiss();
+                safeDismiss(dialog);
                 Intent intent = new Intent();
                 intent.putExtra("nbrOperationsEchoue", nbrOperationsEchoue);
                 setResult(RESULT_OK, intent);
@@ -92,20 +91,6 @@ public class DrawActivity extends ChooseLanguageActivity {
 
     public void clearCanvas(View v) {
         myDrawingView.clearCanvas();
-    }
-
-    public void showToast(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-    }
-
-    public AlertDialog showCustomDialog(int layout) {
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(DrawActivity.this);
-        View mView = getLayoutInflater().inflate(layout, null);
-        mBuilder.setView(mView);
-        AlertDialog dialog = mBuilder.create();
-        dialog.show();
-
-        return dialog;
     }
 
     public void setCurrentLevel(int number, int difficultyLevel) {

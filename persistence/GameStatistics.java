@@ -27,7 +27,7 @@ public class GameStatistics {
         Long min = Long.MAX_VALUE;
 
         int i = 0;
-        while ( tempsPourChaqueNombre[i]!=null && tempsPourChaqueNombre[i]!=0 && i < tempsPourChaqueNombre.length){
+        while ( i < tempsPourChaqueNombre.length && tempsPourChaqueNombre[i]!=null && tempsPourChaqueNombre[i]!=0 ){
             if (tempsPourChaqueNombre[i] < min)  min = tempsPourChaqueNombre[i];
             sum += tempsPourChaqueNombre[i];
             i++;

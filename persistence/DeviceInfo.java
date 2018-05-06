@@ -22,15 +22,16 @@ public class DeviceInfo {
 
     public DeviceInfo(Activity activity) {
         setActivity(activity);
-        getMacAddr();
+        macAddress=getMacAddr();
         getLocationData();
     }
 
-    /* To Retrieve Data From DB and Tests */
+    /* To Retrive Data from DB and Tests */
     public DeviceInfo(String mac_device, String longitude, String latitude) {
+        macAddress = mac_device;
+        this.latitude = Double.parseDouble(latitude);
+        this.longitude = Double.parseDouble(longitude);
     }
-
-
 
     private String getMacAddr() {
         try {
@@ -86,11 +87,6 @@ public class DeviceInfo {
     }
 
 
-
-
-
-
-
     public String getMacAddress() {
         return macAddress;
     }
@@ -101,10 +97,6 @@ public class DeviceInfo {
 
     public double getLatitude() {
         return latitude;
-    }
-
-    public Activity getActivity() {
-        return activity;
     }
 
     public void setActivity(Activity activity) {

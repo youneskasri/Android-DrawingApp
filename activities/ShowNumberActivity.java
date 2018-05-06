@@ -34,7 +34,7 @@ public class ShowNumberActivity extends AppCompatActivity {
     public void endTheGame(boolean wonTheGame){
 
         numberTextView.setTextSize(32);
-        numberTextView.setText("Game Over");
+        numberTextView.setText(R.string.you_won);
         gameOver = true;
 
         currentLevel = new Level(); // reinitialiser à 0
@@ -46,6 +46,7 @@ public class ShowNumberActivity extends AppCompatActivity {
         }
         finish();
     }
+
 
     private void updateShowNumberLayout() {
         numberTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,currentLevel.getNumbersFontSize());

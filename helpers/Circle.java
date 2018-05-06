@@ -22,6 +22,7 @@ public class Circle {
         setPaint();
     }
 
+
     public Circle(float x, float y){
         this(x, y, 1f*Dev.MAX_TOLERANCE_EASY, new Paint());
         setPaint();

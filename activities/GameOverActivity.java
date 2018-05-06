@@ -1,10 +1,11 @@
 package gl2.kasri.younes.paintapplication.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import gl2.kasri.younes.paintapplication.Dev;
 import gl2.kasri.younes.paintapplication.R;
 
 public class GameOverActivity extends ChooseLanguageActivity {
@@ -18,24 +19,14 @@ public class GameOverActivity extends ChooseLanguageActivity {
         addDrawerItems();
 
         ImageView imageView = findViewById(R.id.imageView);
-        TextView messageTextView = findViewById(R.id.messageTextView);
 
         boolean wonTheGame = getIntent().getBooleanExtra("wonTheGame", false);
 
-        String message;
-        int idImage;
+        int idImage = R.drawable.trophy;
 
-        if (wonTheGame || true){
-            //message = "Congratulations ! You won";
-            idImage = R.drawable.trophy;
-        } else {
-            /* is never reached in this version b/c
-            * we don't want to hurt the child */
-            message = "Too bad :( .. Keep trying";
-            idImage = R.drawable.cross;
-        }
+        if (wonTheGame)
+            Log.i(Dev.TAG, "onCreate: WON THE GAME");
 
-        //messageTextView.setText(message);
         imageView.setImageResource(idImage);
     }
 
