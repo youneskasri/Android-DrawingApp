@@ -1,5 +1,6 @@
 package gl2.kasri.younes.paintapplication.persistence;
 
+@SuppressWarnings("WeakerAccess")
 public class GameStatistics {
 
     private int nbCorrectAnswers; /* lors de operationReussie() */

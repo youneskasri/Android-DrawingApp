@@ -5,12 +5,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
+
+import static gl2.kasri.younes.paintapplication.Dev.TAG;
 
 
+@SuppressWarnings("WeakerAccess")
 public class GameDatabaseHandler extends SQLiteOpenHelper {
 
     // Database Version
@@ -91,7 +96,7 @@ public class GameDatabaseHandler extends SQLiteOpenHelper {
         values.put(e, info.getId_exercice());
         values.put(f, info.getId_niveau());
         //DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        SimpleDateFormat sdfm = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        SimpleDateFormat sdfm = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.UK);
         //String da = df.format(Game.getDate_actuelle());
         String hd = sdfm.format(info.getLevelStartTime());
         String hf = sdfm.format(info.getLevelFinishTime());
@@ -117,8 +122,9 @@ public class GameDatabaseHandler extends SQLiteOpenHelper {
         Cursor rs = getReadableDatabase().rawQuery("SELECT * FROM Game_Infos", null);
         rs.moveToFirst();
 
-        while (rs.isAfterLast() == false) {
+        while (!rs.isAfterLast()) {
             String id = rs.getString(rs.getColumnIndex(a));
+            Log.i(TAG, "getAllRecord: Retrieving Record N°="+id);
             String id_application =rs.getString(rs.getColumnIndex(b));
             String id_apprenant = rs.getString(rs.getColumnIndex(c));
             String id_accompagnant = rs.getString(rs.getColumnIndex(d));
@@ -136,11 +142,11 @@ public class GameDatabaseHandler extends SQLiteOpenHelper {
             String mac_device = rs.getString(rs.getColumnIndex(p));
             String flag = rs.getString(rs.getColumnIndex(q));
 
-            SimpleDateFormat sdfm = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            SimpleDateFormat sdfm = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.UK);
 
             DeviceInfo device = new DeviceInfo(mac_device, longitude, latitude);
 
-            GameInfo info = null;
+            GameInfo info;
             try {
                 Date heureDebut  = sdfm.parse(heure_debut);
                 Date heureFin = sdfm.parse(heure_fin);
@@ -158,6 +164,7 @@ public class GameDatabaseHandler extends SQLiteOpenHelper {
             rs.moveToNext();
         }
 
+        rs.close();
         return results;
     }
 

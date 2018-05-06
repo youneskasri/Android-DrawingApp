@@ -42,7 +42,7 @@ public class MainActivity extends ChooseLanguageActivity {
                 intent.putExtra("wonTheGame", true);
                 startActivity(intent);
             } else if (resultCode == RESULT_CANCELED ){
-                // TODO RESULT_CANCELED C' QUOI ??
+                showToast("Result Canceled");
             }
         }
     }

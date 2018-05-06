@@ -1,5 +1,6 @@
 package gl2.kasri.younes.paintapplication.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +32,7 @@ public class ShowNumberActivity extends AppCompatActivity {
 
     protected Level currentLevel;
 
-    public void endTheGame(boolean wonTheGame){
+    public void endTheGame(){
 
         numberTextView.setTextSize(32);
         numberTextView.setText(R.string.you_won);
@@ -39,20 +40,19 @@ public class ShowNumberActivity extends AppCompatActivity {
 
         currentLevel = new Level(); // reinitialiser à 0
 
-        if (wonTheGame) {
-            setResult(RESULT_OK);
-        } else {
-            setResult(RESULT_CANCELED);
-        }
+        setResult(RESULT_OK);
+
         finish();
     }
 
 
+    @SuppressLint("DefaultLocale")
     private void updateShowNumberLayout() {
         numberTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,currentLevel.getNumbersFontSize());
 
         int number = currentLevel.getNumber();
-        numberTextView.setText(""+number);
+
+        numberTextView.setText(String.format("%d", number));
         numberNameTextView.setText(getStringIdFromNumber(number));
         levelTextView.setText(getLevelName(currentLevel));
     }
@@ -147,7 +147,7 @@ public class ShowNumberActivity extends AppCompatActivity {
                 }
 
                 if ( currentLevel.isOver() ) {
-                    endTheGame(true);
+                    endTheGame();
                 }
             } else if (resultCode == RESULT_CANCELED ){
                 Log.i(Dev.TAG, "WRONG_ANSWER onActivityResult: Try again with the same number");

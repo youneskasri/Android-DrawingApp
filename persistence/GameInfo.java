@@ -5,6 +5,7 @@ import java.util.Date;
 import gl2.kasri.younes.paintapplication.Dev;
 import gl2.kasri.younes.paintapplication.helpers.Level;
 
+@SuppressWarnings("WeakerAccess")
 public class GameInfo {
 
     String id_application = Dev.ID_EXERCICE;

@@ -23,12 +23,6 @@ public class Circle {
     }
 
 
-    public Circle(float x, float y){
-        this(x, y, 1f*Dev.MAX_TOLERANCE_EASY, new Paint());
-        setPaint();
-    }
-
-
     private void setPaint() {
         paint.setColor(Color.LTGRAY);
         paint.setAntiAlias(true);

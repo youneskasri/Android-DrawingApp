@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import gl2.kasri.younes.paintapplication.activities.ShowNumberActivity;
 import gl2.kasri.younes.paintapplication.helpers.Level;
 
-
+@SuppressWarnings("WeakerAccess")
 public class Game {
 
     private GameInfo gameInfo;

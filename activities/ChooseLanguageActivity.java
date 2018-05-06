@@ -45,21 +45,23 @@ abstract class ChooseLanguageActivity extends AppCompatActivity {
         final EditText nbOfAttemptsTxt = dialog.findViewById(R.id.nbOfAttempts);
         final EditText startingLevelTxt = dialog.findViewById(R.id.startingLevel);
         final EditText startingNumberTxt = dialog.findViewById(R.id.startingNumber);
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if (okButton != null) {
+            okButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                Dev.NUMBER_OF_ATTEMPTS = getIntegerFromTxt(nbOfAttemptsTxt);
-                Dev.STARTING_LEVEL = getIntegerFromTxt(startingLevelTxt);
-                Dev.STARTING_NUMBER = getIntegerFromTxt(startingNumberTxt);
+                    Dev.NUMBER_OF_ATTEMPTS = getIntegerFromTxt(nbOfAttemptsTxt);
+                    Dev.STARTING_LEVEL = getIntegerFromTxt(startingLevelTxt);
+                    Dev.STARTING_NUMBER = getIntegerFromTxt(startingNumberTxt);
 
-                safeDismiss(dialog);
+                    safeDismiss(dialog);
 
-                if (!ChooseLanguageActivity.this.getClass().getSimpleName().equals("MainActivity")){
-                    showToast("Les modifications seront prises en compte lors de la prochaine partie");
+                    if (!ChooseLanguageActivity.this.getClass().getSimpleName().equals("MainActivity")){
+                        showToast("Les modifications seront prises en compte lors de la prochaine partie");
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     private int getIntegerFromTxt(EditText startingNumberTxt) {

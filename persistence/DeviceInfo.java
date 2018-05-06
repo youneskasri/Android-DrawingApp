@@ -8,11 +8,15 @@ import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.util.Log;
 
 import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
 
+import static gl2.kasri.younes.paintapplication.Dev.TAG;
+
+@SuppressWarnings("WeakerAccess")
 public class DeviceInfo {
 
     private String macAddress;
@@ -55,6 +59,7 @@ public class DeviceInfo {
                 return res1.toString();
             }
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return "02:00:00:00:00:00";
     }
@@ -62,16 +67,19 @@ public class DeviceInfo {
     private void getLocationData(){
         Geocoder geocoder;
         String bestProvider;
-        List<Address> user = null;
+        List<Address> user;
 
         LocationManager lm = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-
+        if (lm == null){
+            Log.i(TAG, "getLocationData: Couldn't get Location data");
+            return;
+        }
         Criteria criteria = new Criteria();
         bestProvider = lm.getBestProvider(criteria, false);
         @SuppressLint("MissingPermission") Location location = lm.getLastKnownLocation(bestProvider);
 
         if (location == null){
-
+            Log.i(TAG, "getLocationData: Couldn't get Location data");
         }else{
             geocoder = new Geocoder(activity);
             try {
