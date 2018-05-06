@@ -12,7 +12,9 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import gl2.kasri.younes.paintapplication.R;
 import gl2.kasri.younes.paintapplication.activities.DrawActivity;
 import gl2.kasri.younes.paintapplication.helpers.Circle;
 import gl2.kasri.younes.paintapplication.helpers.Level;
@@ -149,7 +151,7 @@ public class MyDrawingView extends CanvasView {
 
     private void checkRemainingAttempts(){
         int remainingAttempts = currentLevel.checkRemainingAttempts();
-        drawActivity.showToast("Attention ! Il vous reste " + remainingAttempts +" tentative(s)");
+        drawActivity.showToast(String.format(Locale.UK,"%s %d", drawActivity.getString(R.string.remaining_attempts), remainingAttempts));
         if ( remainingAttempts == 0 ){
             drawActivity.wrongAnswer();
             currentLevel.refreshRemainingAttempts();
@@ -204,9 +206,10 @@ public class MyDrawingView extends CanvasView {
 
 
     @Deprecated
+    @SuppressWarnings("all")
     private void drawCircles() {
         for (Circle c : circles) {
-            float radius = c.radius * density / currentLevel.getDifficultyLevel(); // TODO
+            float radius = c.radius * density / currentLevel.getDifficultyLevel();
             canvas.drawCircle(c.x * density, c.y * density, radius, c.paint);
         }
     }

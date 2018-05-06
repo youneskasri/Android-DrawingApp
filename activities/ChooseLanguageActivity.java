@@ -57,7 +57,7 @@ abstract class ChooseLanguageActivity extends AppCompatActivity {
                     safeDismiss(dialog);
 
                     if (!ChooseLanguageActivity.this.getClass().getSimpleName().equals("MainActivity")){
-                        showToast("Les modifications seront prises en compte lors de la prochaine partie");
+                        showToast(getString(R.string.modif_params_done));
                     }
                 }
             });

@@ -56,7 +56,7 @@ public class DrawActivity extends ChooseLanguageActivity {
         int n = (int)(Math.random() * bravoSounds.length); if (n==bravoSounds.length) n--;
         bravoSounds[n].start();
 
-        showToast("Good Job ! Moving to the next level");
+        showToast(getString(R.string.moving_next_lvl));
 
         Runnable endTheActivity =  new Runnable() {
             public void run() {
@@ -72,10 +72,7 @@ public class DrawActivity extends ChooseLanguageActivity {
     }
 
     public void wrongAnswer(){
-       /* showToast("You lost ! Try again");
-        setResult(RESULT_CANCELED);
-        finish(); */
-
+        
        nbrOperationsEchoue++;
 
        playTryAgainSound();
