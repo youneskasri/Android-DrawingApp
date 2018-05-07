@@ -38,7 +38,7 @@ public class DeviceInfo {
     }
 
     private String getMacAddr() {
-        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) activity.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wInfo = wifiManager.getConnectionInfo();
         return wInfo.getMacAddress()
     }
