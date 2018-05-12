@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -64,6 +65,50 @@ abstract class ChooseLanguageActivity extends AppCompatActivity {
         }
     }
 
+    public void showChooseLanguageDiaog(){
+        final AlertDialog dialog = showCustomDialog(R.layout.diaog_language);
+
+        final TextView chooseArabic = dialog.findViewById(R.id.chooseArabic);
+        final TextView chooseFrench = dialog.findViewById(R.id.chooseFrench);
+        final TextView chooseEnglish = dialog.findViewById(R.id.chooseEnglish);
+
+        chooseArabic.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                setLocale("AR");
+            }
+        });
+
+        chooseFrench.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setLocale("FR");
+            }
+        });
+
+        chooseEnglish.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                setLocale("EN");
+            }
+        });
+
+    }
+
+    public void showAboutUsDialog(){
+        final AlertDialog dialog = showCustomDialog(R.layout.dialog_about);
+
+        final Button okButton = dialog.findViewById(R.id.validateButton);
+
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                safeDismiss(dialog);
+            }
+        });
+    }
+
+
     private int getIntegerFromTxt(EditText startingNumberTxt) {
         try {
             String str;
@@ -81,21 +126,19 @@ abstract class ChooseLanguageActivity extends AppCompatActivity {
 
     protected void addDrawerItems() {
 
-        String[] osArray = { getString(R.string.LANG), getString(R.string.AR), getString(R.string.FR), getString(R.string.EN) , getString(R.string.config_parameters)};
+        String[] osArray = { getString(R.string.LANG) , getString(R.string.config_parameters), getString(R.string.INFO)};
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, osArray);
         myDrawerList.setAdapter(myAdapter);
         myDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == Dev.LANG_AR_POS){
-                    setLocale("AR");
-                } else if (position == Dev.LANG_FR_POS){
-                    setLocale("FR");
-                } else if (position == Dev.LANG_EN_POS){
-                    setLocale("EN");
+                if (position == Dev.LANG_POS){
+                    showChooseLanguageDiaog();
                 } else if (position == Dev.CONFIG_PARAMS_POS){
                     showParametersDialog();
+                } else if (position == Dev.INFO_POS){
+                    showAboutUsDialog();
                 }
             }
         });

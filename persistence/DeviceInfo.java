@@ -8,10 +8,10 @@ import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.util.Log;
 
-import java.net.NetworkInterface;
-import java.util.Collections;
 import java.util.List;
 
 import static gl2.kasri.younes.paintapplication.Dev.TAG;
@@ -40,7 +40,7 @@ public class DeviceInfo {
     private String getMacAddr() {
         WifiManager wifiManager = (WifiManager) activity.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wInfo = wifiManager.getConnectionInfo();
-        return wInfo.getMacAddress()
+        return wInfo.getMacAddress();
     }
 
     private void getLocationData(){

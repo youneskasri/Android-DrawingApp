@@ -11,10 +11,9 @@ public class Dev {
     public final static int MAX_TOLERANCE_EASY = 45;
     public final static int FONT_SIZE_EASY = 300; // dp
 
-    public final static int LANG_AR_POS = 1;
-    public final static int LANG_FR_POS = 2;
-    public final static int LANG_EN_POS = 3;
-    public final static int CONFIG_PARAMS_POS = 4;
+    public final static int LANG_POS = 0;
+    public final static int CONFIG_PARAMS_POS = 1;
+    public final static int INFO_POS = 2;
 
     /* Parameters */
     public static int NUMBER_OF_ATTEMPTS = 3;

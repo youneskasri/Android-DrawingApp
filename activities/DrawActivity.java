@@ -22,6 +22,9 @@ public class DrawActivity extends ChooseLanguageActivity {
 
     private int nbrOperationsEchoue = 0;
 
+    private static int NUMBER=0;
+    private static int DIFF_LEVEL=1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +34,21 @@ public class DrawActivity extends ChooseLanguageActivity {
         myDrawerList = findViewById(R.id.navList);
         addDrawerItems();
 
-        int number = getIntent().getIntExtra("number", 0);
-        int difficultyLevel = getIntent().getIntExtra("difficulty", 1);
+        /**
+         * Quand je change language => reStart activity
+         * => I get No Intent => Default Values 0 and 1
+         * I Fixed it with STATIC variables
+         */
+        int number = getIntent().getIntExtra("number", -1);
+        int difficultyLevel = getIntent().getIntExtra("difficulty", -1);
+        if (number==-1 || difficultyLevel==-1){
+            number = NUMBER;
+            difficultyLevel = DIFF_LEVEL;
+        } else {
+            NUMBER = number;
+            DIFF_LEVEL = difficultyLevel;
+        }
+
 
         setCurrentLevel(number, difficultyLevel);
         myDrawingView.setDrawActivity(this);
