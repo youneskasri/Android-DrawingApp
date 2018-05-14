@@ -23,8 +23,7 @@ public class GameInfo {
         this.id_exercice = id_exercice;
         this.levelStartTime = levelStartTime;
         this.levelFinishTime = levelFinishTime;
-        String diff = id_level.substring(id_level.length()-1);
-        int difficultyLevel = Integer.parseInt(diff);
+        int difficultyLevel = Integer.parseInt(id_level);
         currentLevel = new Level(0, difficultyLevel);
     }
 
