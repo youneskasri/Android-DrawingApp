@@ -49,8 +49,7 @@ public class GameInfo {
     }
 
     public String getId_niveau() {
-        return id_exercice + "_" +
-                (currentLevel.getDifficultyLevel()-1);
+        return ""+(currentLevel.getDifficultyLevel()-1);
         /* -1 Car dans showNumberActivity on fait nextNumber=>nextDiffLevel avant de tester FinDuNiveau */
     }
 
