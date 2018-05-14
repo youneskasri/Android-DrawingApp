@@ -16,6 +16,7 @@ public class GameInfo {
     Date levelFinishTime; /* lors de finDuJeu() */
 
 
+
     /* To Retrieve Data from DB and Tests */
     public GameInfo(String id_application, String id_exercice, Date levelStartTime, Date levelFinishTime, String id_level){
         this.id_application = id_application;

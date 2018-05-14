@@ -1,10 +1,10 @@
 package gl2.kasri.younes.paintapplication.persistence;
 
+import android.app.Activity;
 import android.util.Log;
 
 import java.util.ArrayList;
 
-import gl2.kasri.younes.paintapplication.activities.ShowNumberActivity;
 import gl2.kasri.younes.paintapplication.helpers.Level;
 
 @SuppressWarnings("WeakerAccess")
@@ -19,7 +19,7 @@ public class Game {
     private String id_accompagnant;
     private boolean flag;
 
-    public Game(ShowNumberActivity showNumberActivity, Level currentLevel) {
+    public Game(Activity showNumberActivity, Level currentLevel) {
 
         deviceInfo = new DeviceInfo( showNumberActivity );
         gameStatistics = new GameStatistics();

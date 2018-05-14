@@ -31,7 +31,7 @@ public class GameDatabaseHandler extends SQLiteOpenHelper {
     private String d = "id_accompagnant";
     private String e = "id_exercice";
     private String f = "id_niveau";
-    //private String g="date_actuelle";
+    private String g="date_actuelle";
     private String h = "heure_debut";
     private String i = "heure_fin";
     private String j = "Nombre_operation_reuss";
@@ -49,14 +49,14 @@ public class GameDatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TABLE = "CREATE TABLE " + TABLE_GAME_i + "("
+        String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_GAME_i + "("
                 + a + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + b + " VARCHAR(100),"
                 + c + " VARCHAR(100),"
                 + d + " VARCHAR(100),"
                 + e + " VARCHAR(100),"
                 + f + " VARCHAR(100),"
-                //      + g + " DATE,"
+                      + g + " DATE,"
                 + h + " DATETIME,"
                 + i + " DATETIME,"
                 + j + " INTEGER,"
@@ -95,12 +95,12 @@ public class GameDatabaseHandler extends SQLiteOpenHelper {
         values.put(d, Game.getId_accompagnant());
         values.put(e, info.getId_exercice());
         values.put(f, info.getId_niveau());
-        //DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+
         SimpleDateFormat sdfm = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.UK);
-        //String da = df.format(Game.getDate_actuelle());
+        String da = sdfm.format(new Date());
         String hd = sdfm.format(info.getLevelStartTime());
         String hf = sdfm.format(info.getLevelFinishTime());
-        //values.put(g, da);
+        values.put(g, da);
         values.put(h, hd);
         values.put(i, hf);
         values.put(j, stats.getNbCorrectAnswers());
@@ -130,7 +130,7 @@ public class GameDatabaseHandler extends SQLiteOpenHelper {
             String id_accompagnant = rs.getString(rs.getColumnIndex(d));
             String id_exercice = rs.getString(rs.getColumnIndex(e));
             String id_niveau = rs.getString(rs.getColumnIndex(f));
-            //rs.getString(rs.getColumnIndex(g));
+            String date_actuelle = rs.getString(rs.getColumnIndex(g));
             String heure_debut = rs.getString(rs.getColumnIndex(h));
             String heure_fin = rs.getString(rs.getColumnIndex(i));
             String nombre_operation_reuss = rs.getString(rs.getColumnIndex(j));

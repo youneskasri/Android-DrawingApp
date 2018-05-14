@@ -57,7 +57,7 @@ abstract class ChooseLanguageActivity extends AppCompatActivity {
 
                     safeDismiss(dialog);
 
-                    if (!ChooseLanguageActivity.this.getClass().getSimpleName().equals("MainActivity")){
+                    if (!ChooseLanguageActivity.this.getClass().getSimpleName().equals("GameMainActivity")){
                         showToast(getString(R.string.modif_params_done));
                     }
                 }

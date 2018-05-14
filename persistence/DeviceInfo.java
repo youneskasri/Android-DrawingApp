@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class DeviceInfo {
         setActivity(activity);
         macAddress=getMacAddr();
         getLocationData();
+        Toast.makeText(activity, "Lat = "+latitude+" Long = "+longitude, Toast.LENGTH_SHORT).show();
     }
 
     /* To Retrive Data from DB and Tests */
@@ -65,7 +67,6 @@ public class DeviceInfo {
                 user = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                 latitude =  user.get(0).getLatitude();
                 longitude =  user.get(0).getLongitude();
-                System.out.println(" DDD lat: " + latitude +",  longitude: "+ longitude);
 
             }catch (Exception e) {
                 e.printStackTrace();
